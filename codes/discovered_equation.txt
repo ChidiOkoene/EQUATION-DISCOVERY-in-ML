@@ -1,0 +1,13 @@
+Discovered Governing Equation
+
+LaTeX format:
+$$ \frac{d}{d t} u = 0.100000001490116 \frac{d^{2}}{d x^{2}} u $$
+
+Python format:
+u = Symbol('u')
+t = Symbol('t')
+x = Symbol('x')
+e = Eq(Derivative(u, t), Float('0.10000000149011612', precision=53)*Derivative(u, (x, 2)))
+
+Plain text format:
+Eq(Derivative(u, t), 0.100000001490116*Derivative(u, (x, 2)))
