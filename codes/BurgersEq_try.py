@@ -84,7 +84,7 @@ with tf.device('/device:CPU:0'):
             self.weights, self.biases = self.initialize_NN(layers)
             
             # Use tf.compat.v1.Session for compatibility with TF 1.x
-            config = tf.compat.v1.ConfigProto(allow_soft_placement=True, log_device_placement=True)
+            config = tf.compat.v1.ConfigProto(allow_soft_placement=True, log_device_placement=False)
             # Remove GPU-specific code for CPU usage
             # config.gpu_options.allow_growth = True  # Not needed for CPU
 
@@ -182,7 +182,7 @@ with tf.device('/device:CPU:0'):
                 x0=np.concatenate([v.flatten() for v in self.sess.run(var_list_1)]),
                 jac=grad_fn,
                 method="L-BFGS-B",
-                options={"maxiter": 1000, "maxfun": 1000, "maxcor": 50, "ftol": 1.0 * np.finfo(float).eps},
+                options={"maxiter": 100, "maxfun": 100, "maxcor": 50, "ftol": 1.0 * np.finfo(float).eps},
             )
 
             self.optimizer_Pretrain = lambda: minimize(
@@ -191,8 +191,8 @@ with tf.device('/device:CPU:0'):
                 jac=pretrain_grad_fn,
                 method='L-BFGS-B',
                 options={
-                    'maxiter': 10000,
-                    'maxfun': 10000,
+                    'maxiter': 100,
+                    'maxfun': 100,
                     'maxcor': 50,
                     'maxls': 50,
                     'ftol': 1.0 * np.finfo(float).eps
@@ -212,7 +212,7 @@ with tf.device('/device:CPU:0'):
             ######### Adam Optimizer for additional training #########################
             self.global_step = tf.Variable(0, trainable=False)
             starter_learning_rate = 1e-3
-            self.learning_rate = tf.compat.v1.train.exponential_decay(starter_learning_rate, self.global_step, 1000, 0.75, staircase=True)
+            self.learning_rate = tf.compat.v1.train.exponential_decay(starter_learning_rate, self.global_step, 100, 0.75, staircase=True)
             self.optimizer_Adam = tf.compat.v1.train.AdamOptimizer(learning_rate=1e-3, beta1=0.99, beta2=0.9, epsilon=1e-8)
             self.train_op_Adam = self.optimizer_Adam.minimize(self.loss, var_list=var_list_1, global_step=self.global_step)
             
@@ -359,7 +359,7 @@ with tf.device('/device:CPU:0'):
                 # Loop of Adam optimization
                 print('Adam begins')
                 start_time = time.time()
-                for it_Adam in range(1000):
+                for it_Adam in range(100):
                     
                     self.sess.run(self.train_op_Adam, self.tf_dict)
                     
@@ -428,7 +428,7 @@ with tf.device('/device:CPU:0'):
             
             normalize = 2
             split = 0.8
-            print_best_tol = False     
+            print_best_tol = True     
             Phi_pred, u_t_pred = self.sess.run([self.Phi_pred, self.u_t_pred], self.tf_dict)
             
             lambda2 = self.TrainSTRidge(Phi_pred, u_t_pred, lam, d_tol, maxit, STR_iters, l0_penalty, normalize, split,
@@ -537,7 +537,7 @@ with tf.device('/device:CPU:0'):
                     
             return np.real(np.multiply(Mreg, w_best))     
         
-        def STRidge(self, X0, y, lam, maxit, tol, Mreg, normalize = 2, print_results = False):
+        def STRidge(self, X0, y, lam, maxit, tol, Mreg, normalize = 2, print_results = True):
         
             n,d = X0.shape
             X = np.zeros((n,d), dtype=np.complex64)
@@ -620,14 +620,15 @@ with tf.device('/device:CPU:0'):
         
         start_time = time.time()
         
-        layers = [2, 20, 20, 20, 20, 20, 20, 20, 20, 1]
+         #layers = [2, 20, 20, 20, 20, 20, 20, 20, 20, 1]
+        layers = [2, 20, 20, 1]
         
 # =============================================================================
 #         load data
 # =============================================================================
         # data = scipy.io.loadmat(os.path.dirname(os.getcwd()) + '\\burgers.mat')
         # data = scipy.io.loadmat(os.path.dirname(os.path.dirname(os.getcwd())) + '\\burgers.mat')
-        data = scipy.io.loadmat("C:/Users/chidi/Downloads/burgers.mat")
+        data = scipy.io.loadmat(r'C:\Users\ochid\Documents\EQD_hub\EQDiscovery\Examples\Discovery with Single Dataset\Burgers\burgers.mat')
         
         t = np.real(data['t'].flatten()[:,None])
         x = np.real(data['x'].flatten()[:,None])
