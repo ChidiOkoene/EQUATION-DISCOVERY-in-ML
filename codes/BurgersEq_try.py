@@ -428,13 +428,13 @@ with tf.device('/device:CPU:0'):
             
             normalize = 2
             split = 0.8
-            print_best_tol = True     
+            print_best_tol = False     
             Phi_pred, u_t_pred = self.sess.run([self.Phi_pred, self.u_t_pred], self.tf_dict)
             
             lambda2 = self.TrainSTRidge(Phi_pred, u_t_pred, lam, d_tol, maxit, STR_iters, l0_penalty, normalize, split,
                                              print_best_tol)     
             
-            self.lambda1 = tf.assign(self.lambda1, tf.convert_to_tensor(lambda2, dtype = tf.float32))
+            self.lambda1.assign(tf.convert_to_tensor(lambda2, dtype=tf.float32))
                     
         def TrainSTRidge(self, R0, Ut, lam, d_tol, maxit, STR_iters = 10, l0_penalty = None, normalize = 2, split = 0.8, 
                          print_best_tol = False):            
@@ -537,7 +537,7 @@ with tf.device('/device:CPU:0'):
                     
             return np.real(np.multiply(Mreg, w_best))     
         
-        def STRidge(self, X0, y, lam, maxit, tol, Mreg, normalize = 2, print_results = True):
+        def STRidge(self, X0, y, lam, maxit, tol, Mreg, normalize = 2, print_results = False):
         
             n,d = X0.shape
             X = np.zeros((n,d), dtype=np.complex64)
@@ -620,7 +620,7 @@ with tf.device('/device:CPU:0'):
         
         start_time = time.time()
         
-         #layers = [2, 20, 20, 20, 20, 20, 20, 20, 20, 1]
+      # layers = [2, 20, 20, 20, 20, 20, 20, 20, 20, 1]
         layers = [2, 20, 20, 1]
         
 # =============================================================================
@@ -628,7 +628,7 @@ with tf.device('/device:CPU:0'):
 # =============================================================================
         # data = scipy.io.loadmat(os.path.dirname(os.getcwd()) + '\\burgers.mat')
         # data = scipy.io.loadmat(os.path.dirname(os.path.dirname(os.getcwd())) + '\\burgers.mat')
-        data = scipy.io.loadmat(r'C:\Users\ochid\Documents\EQD_hub\EQDiscovery\Examples\Discovery with Single Dataset\Burgers\burgers.mat')
+        data = scipy.io.loadmat("C:/Users/chidi/Downloads/burgers.mat")
         
         t = np.real(data['t'].flatten()[:,None])
         x = np.real(data['x'].flatten()[:,None])
@@ -718,24 +718,36 @@ with tf.device('/device:CPU:0'):
         
         fig = plt.figure()
         plt.plot(loss_u_history_Pretrain)
-        plt.yscale('log')       
+        if np.any(loss_u_history_Pretrain > 0):
+            plt.yscale('log')
+        else:
+            print("Data contains no positive values, skipping log scale.")       
         plt.xlabel('10x')
         plt.title('loss_u history of BFGS(Pretraining)')  
         plt.savefig('2.png')
+        plt.close(fig)
         
         fig = plt.figure()
         plt.plot(loss_f_history_Pretrain)
-        plt.yscale('log')       
+        if np.any(loss_f_history_Pretrain > 0):
+            plt.yscale('log')
+        else:
+            print("Data contains no positive values, skipping log scale.")      
         plt.xlabel('10x')
         plt.title('loss_f history of BFGS(Pretraining)')     
         plt.savefig('3.png')
+        plt.close(fig)
         
         fig = plt.figure()
         plt.plot(loss_lambda_history_Pretrain)
-        plt.yscale('log')       
+        if np.any(loss_lambda_history_Pretrain > 0):
+            plt.yscale('log')
+        else:
+            print("Data contains no positive values, skipping log scale.")         
         plt.xlabel('10x')
         plt.title('loss_lambda history of BFGS(Pretraining)')  
         plt.savefig('4.png')
+        plt.close(fig)
         
         fig = plt.figure()
         plt.plot(loss_history_val_Pretrain)
@@ -745,17 +757,25 @@ with tf.device('/device:CPU:0'):
         
         fig = plt.figure()
         plt.plot(loss_u_history_val_Pretrain)
-        plt.yscale('log')       
+        if np.any(loss_u_history_val_Pretrain > 0):
+            plt.yscale('log')
+        else:
+            print("Data contains no positive values, skipping log scale.")        
         plt.xlabel('10x')
         plt.title('loss_u_val history of BFGS(Pretraining)')  
         plt.savefig('6.png')
+        plt.close(fig)
         
         fig = plt.figure()
         plt.plot(loss_f_history_val_Pretrain)
-        plt.yscale('log')       
+        if np.any(loss_f_history_val_Pretrain > 0):
+            plt.yscale('log')
+        else:
+            print("Data contains no positive values, skipping log scale.")        
         plt.xlabel('10x')
         plt.title('loss_f_val history of BFGS(Pretraining)')
         plt.savefig('7.png')
+        plt.close(fig)
         
         ######################## Plots for Adam #################
         fig = plt.figure()
@@ -763,47 +783,69 @@ with tf.device('/device:CPU:0'):
         plt.xlabel('10x')
         plt.title('log loss history of Adam')
         plt.savefig('8.png')
+        plt.close(fig)
         
         fig = plt.figure()
         plt.plot(loss_u_history_Adam)
-        plt.yscale('log')       
+        if np.any(loss_u_history_Adam > 0):
+            plt.yscale('log')
+        else:
+            print("Data contains no positive values, skipping log scale.")        
         plt.xlabel('10x')
         plt.title('loss_u history of Adam')  
         plt.savefig('9.png')
+        plt.close(fig)
         
         fig = plt.figure()
         plt.plot(loss_f_history_Adam)
-        plt.yscale('log')       
+        if np.any(loss_f_history_Adam > 0):
+            plt.yscale('log')
+        else:
+            print("Data contains no positive values, skipping log scale.")        
         plt.xlabel('10x')
         plt.title('loss_f history of Adam')  
         plt.savefig('10.png')
+        plt.close(fig)
                 
         fig = plt.figure()
         plt.plot(loss_lambda_history_Adam)
-        plt.yscale('log')       
+        if np.any(loss_lambda_history_Adam > 0):
+            plt.yscale('log')
+        else:
+            print("Data contains no positive values, skipping log scale.")        
         plt.xlabel('10x')
         plt.title('loss_lambda history of Adam')  
         plt.savefig('11.png')
+        plt.close(fig)
         
         fig = plt.figure()
         plt.plot(loss_history_Adam_val)
         plt.xlabel('10x')
         plt.title('log loss_val history of Adam')
         plt.savefig('12.png')
+        plt.close(fig)
         
         fig = plt.figure()
         plt.plot(loss_u_history_Adam_val)
-        plt.yscale('log')       
+        if np.any(loss_u_history_Adam_val > 0):
+            plt.yscale('log')
+        else:
+            print("Data contains no positive values, skipping log scale.")        
         plt.xlabel('10x')
         plt.title('loss_u_val history of Adam')  
         plt.savefig('13.png')
+        plt.close(fig)
         
         fig = plt.figure()
         plt.plot(loss_f_history_Adam_val)
-        plt.yscale('log')       
+        if np.any(loss_f_history_Adam_val > 0):
+            plt.yscale('log')
+        else:
+            print("Data contains no positive values, skipping log scale.")        
         plt.xlabel('10x')
         plt.title('loss_f_val history of Adam')  
         plt.savefig('14.png')
+        plt.close(fig)
                 
         ######################## Plots for BFGS #################
         # fig = plt.figure()
@@ -856,37 +898,52 @@ with tf.device('/device:CPU:0'):
         ########################## Plots for STRidge #######################
         fig = plt.figure()
         plt.plot(loss_history_STRidge)
-        plt.yscale('log')       
+        if np.any(loss_history_STRidge > 0):
+            plt.yscale('log')
+        else:
+            print("Data contains no positive values, skipping log scale.")        
         plt.title('loss history of STRidge')
         plt.savefig('22.png')
+        plt.close(fig)
         
         fig = plt.figure()
         plt.plot(loss_f_history_STRidge)
-        plt.yscale('log')       
+        if np.any(loss_f_history_STRidge > 0):
+            plt.yscale('log')
+        else:
+            print("Data contains no positive values, skipping log scale.")        
         plt.title('loss_f history of STRidge')  
         plt.savefig('23.png')
+        plt.close(fig)
         
         fig = plt.figure()
         plt.plot(loss_lambda_history_STRidge)
-        plt.yscale('log')       
+        if np.any(loss_lambda_history_STRidge > 0):
+            plt.yscale('log')
+        else:
+            print("Data contains no positive values, skipping log scale.")        
         plt.title('loss_lambda history of STRidge')
         plt.savefig('24.png')
+        plt.close(fig)
         
         fig = plt.figure()
         plt.plot(tol_history_STRidge)
         plt.title('Tolerance History ')
         plt.savefig('25.png')
+        plt.close(fig)
         
         fig = plt.figure()
         plt.plot(optimaltol_history)
         plt.title('History of Optimal Tolerance')
-        plt.savefig('26.png')     
+        plt.savefig('26.png')
+        plt.close(fig)     
         
         fig = plt.figure()
         for i in range(lambda_normalized_history_STRidge.shape[0]):
             plt.plot(lambda_normalized_history_STRidge[i, 1:])
         plt.title('lambda_normalized_history_STRidge')
         plt.savefig('27.png')
+        plt.close(fig)
         
 # =============================================================================
 #         Compare with ground truth if training is sufficient
@@ -905,41 +962,41 @@ with tf.device('/device:CPU:0'):
                                           'ridge_append_counter_STRidge': ridge_append_counter_STRidge,
                                           'loss_f_history_STRidge': loss_f_history_STRidge}) 
         
-        # plot the whole domain 
+        # Plot the whole domain
         U_pred = griddata(X_star, u_FullField_Pred.flatten(), (X, T), method='cubic')
         fig = plt.figure()
-        ax = fig.gca(projection='3d')
-        surf = ax.plot_surface(X, T, U_pred, cmap=cm.coolwarm,
-                           linewidth=0, antialiased=False)    
+        ax = fig.add_subplot(111, projection='3d')
+        surf = ax.plot_surface(X, T, U_pred, cmap=cm.coolwarm, linewidth=0, antialiased=False)
         ax.set_xlabel('x')
         ax.set_ylabel('t')
         ax.set_zlabel('u')
-        plt.title('Model Result')       
+        plt.title('Model Result')
         plt.savefig('28.png')
-        # plot the whole domain truth
+
+        # Plot the whole domain truth
         fig = plt.figure()
-        ax = fig.gca(projection='3d')
-        surf = ax.plot_surface(X, T, Exact, cmap=cm.coolwarm,
-                           linewidth=0, antialiased=False)
-        ax.set_zlim(0,1)
+        ax = fig.add_subplot(111, projection='3d')
+        surf = ax.plot_surface(X, T, Exact, cmap=cm.coolwarm, linewidth=0, antialiased=False)
+        ax.set_zlim(0, 1)
         ax.set_xlabel('x')
         ax.set_ylabel('t')
         ax.set_zlabel('u')
         plt.title('Ground Truth')
         plt.savefig('29.png')
 
+
         # lambda
         lambda1_value = model.sess.run(model.lambda1)
         lambda1_true = np.zeros((16,1))
         lambda1_true[5] = -1
         lambda1_true[8] = 0.1
-        cosine_similarity = 1-distance.cosine(lambda1_true,lambda1_value)
+        cosine_similarity = 1 - distance.cosine(lambda1_true.flatten(), lambda1_value.flatten())
         f.write('Cosine similarity of lambda: %.2f \n' % (cosine_similarity))
 
         lambda5_error = np.abs((lambda1_true[5]-lambda1_value[5])/lambda1_true[5])*100
         lambda8_error = np.abs((lambda1_true[8]-lambda1_value[8])/lambda1_true[8])*100
-        f.write('lambda5_error: %.2f%% \n' % (lambda5_error))
-        f.write('lambda8_error: %.2f%% \n' % (lambda8_error))
+        f.write('lambda5_error: %.2f%% \n' % (lambda5_error.item()))
+        f.write('lambda8_error: %.2f%% \n' % (lambda8_error.item()))
         
         lambda_error = np.linalg.norm(lambda1_true-lambda1_value,2)/np.linalg.norm(lambda1_true,2)
         f.write('Lambda L2 Error: %e \n' % (lambda_error))   
