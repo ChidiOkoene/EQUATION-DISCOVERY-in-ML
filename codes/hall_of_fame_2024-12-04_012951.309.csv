@@ -1,0 +1,2 @@
+Complexity,Loss,Equation
+11,0.01013704,"u_x * (u_x * (u * u_xx))"

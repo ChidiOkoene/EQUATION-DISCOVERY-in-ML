@@ -1,0 +1,2 @@
+Complexity,Loss,Equation
+9,0.05420785,"u_xx * (-1.8242705 * u_x)"
