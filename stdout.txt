@@ -31,3 +31,35 @@ Lambda L2 Error: 1.030274e+00
 lambda_error_mean: 89.77% 
 lambda_error_std: 8.87% 
 The discovered equation: u_t = 0.0062990691+-0.049874365u+-0.021754166u**2+-0.016836312u**3+-0.2972217u_x+-0.013585231u*u_x+-0.010409475u**2*u_x+-0.0055597113u**3*u_x+0.019091971u_xx+-0.0018812956u*u_xx+-0.01573334u**2*u_xx+-0.019614592u**3*u_xx+0.0055595688u_xxx+0.0075280773u*u_xxx+0.0052905544u**2*u_xxx+-0.0016439237u**3*u_xxx
+Training Error u: 1.141964e-01 
+Validation Error u: 1.110178e-01 
+Training time: 2251.7522 
+Full Field Error u: 1.029755e-01 
+Cosine similarity of lambda: 0.05 
+lambda5_error: 98.64% 
+lambda8_error: 80.91% 
+Lambda L2 Error: 1.030274e+00 
+lambda_error_mean: 89.77% 
+lambda_error_std: 8.87% 
+The discovered equation: u_t = 0.0062990691+-0.049874365u+-0.021754166u**2+-0.016836312u**3+-0.2972217u_x+-0.013585231u*u_x+-0.010409475u**2*u_x+-0.0055597113u**3*u_x+0.019091971u_xx+-0.0018812956u*u_xx+-0.01573334u**2*u_xx+-0.019614592u**3*u_xx+0.0055595688u_xxx+0.0075280773u*u_xxx+0.0052905544u**2*u_xxx+-0.0016439237u**3*u_xxx
+Training Error u: 1.141964e-01 
+Validation Error u: 1.110178e-01 
+Training time: 2298.5979 
+Full Field Error u: 1.029755e-01 
+Cosine similarity of lambda: 0.05 
+lambda5_error: 98.64% 
+lambda8_error: 80.91% 
+Lambda L2 Error: 1.030274e+00 
+lambda_error_mean: 89.77% 
+lambda_error_std: 8.87% 
+The discovered equation: u_t = 0.0062990691+-0.049874365u+-0.021754166u**2+-0.016836312u**3+-0.2972217u_x+-0.013585231u*u_x+-0.010409475u**2*u_x+-0.0055597113u**3*u_x+0.019091971u_xx+-0.0018812956u*u_xx+-0.01573334u**2*u_xx+-0.019614592u**3*u_xx+0.0055595688u_xxx+0.0075280773u*u_xxx+0.0052905544u**2*u_xxx+-0.0016439237u**3*u_xxxTraining Error u: 1.141964e-01 
+Validation Error u: 1.110178e-01 
+Training time: 2525.3851 
+Full Field Error u: 1.029755e-01 
+Cosine similarity of lambda: 0.05 
+lambda5_error: 98.64% 
+lambda8_error: 80.91% 
+Lambda L2 Error: 1.030274e+00 
+lambda_error_mean: 89.77% 
+lambda_error_std: 8.87% 
+The discovered equation: u_t = 0.0062990691+-0.049874365u+-0.021754166u**2+-0.016836312u**3+-0.2972217u_x+-0.013585231u*u_x+-0.010409475u**2*u_x+-0.0055597113u**3*u_x+0.019091971u_xx+-0.0018812956u*u_xx+-0.01573334u**2*u_xx+-0.019614592u**3*u_xx+0.0055595688u_xxx+0.0075280773u*u_xxx+0.0052905544u**2*u_xxx+-0.0016439237u**3*u_xxx

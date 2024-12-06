@@ -1025,4 +1025,64 @@ with tf.device('/device:CPU:0'):
         plt.title('lambda values')
         plt.legend(['the true', 'the identified'])
         plt.savefig('30.png')
-        
+
+        # Ensure U_pred and Exact are flattened
+        U_pred_flat = U_pred.flatten()
+        Exact_flat = Exact.flatten()
+
+        # Line Plot: Compare trends of predicted and exact u
+        fig = plt.figure(figsize=(10, 6))
+        plt.plot(Exact_flat, label="Ground Truth $u$", linewidth=2)
+        plt.plot(U_pred_flat, linestyle='dashed', label="Predicted $u$", linewidth=2)
+        plt.xlabel("Index")
+        plt.ylabel("$u$")
+        plt.title("Comparison of Ground Truth and Predicted $u$")
+        plt.legend()
+        plt.grid(True)
+        plt.savefig('u_comparison_line.png')
+        plt.close(fig)
+
+        # Scatter Plot: Compare point-to-point predicted and ground truth u
+        fig = plt.figure(figsize=(8, 6))
+        plt.scatter(Exact_flat, U_pred_flat, alpha=0.6, edgecolor='k', label="Predicted $u$")
+        plt.plot([Exact_flat.min(), Exact_flat.max()],
+                [Exact_flat.min(), Exact_flat.max()],
+                'r--', label="Perfect Match")
+        plt.xlabel("Ground Truth $u$")
+        plt.ylabel("Predicted $u$")
+        plt.title("Scatter Plot: Ground Truth vs Predicted $u$")
+        plt.legend()
+        plt.grid(True)
+        plt.savefig('u_comparison_scatter.png')
+        plt.close(fig)
+
+        # Extract slices to compare (e.g., at a specific time t or spatial location x)
+        t_index = 50  # Choose a specific time index for comparison
+        x_line = X[t_index, :]  # Extract x values for the selected time
+        u_pred_line = U_pred[t_index, :]  # Predicted u(x, t) at t_index
+        u_exact_line = Exact[t_index, :]  # Ground truth u(x, t) at t_index
+
+        # Plot the comparison
+        fig = plt.figure(figsize=(10, 6))
+        plt.plot(x_line, u_exact_line, label="Ground Truth $u(x)$", linewidth=2)
+        plt.plot(x_line, u_pred_line, label="Predicted $u(x)$", linestyle='dashed', linewidth=2)
+        plt.xlabel("x")
+        plt.ylabel("u(x)")
+        plt.title(f"Comparison of $u(x)$ at t = {T[t_index, 0]:.2f}")
+        plt.legend()
+        plt.grid(True)
+        plt.savefig("comparison_u_line.png")
+        plt.close(fig)
+
+        # Compute the absolute difference
+        u_diff = np.abs(U_pred - Exact)
+
+        # Plot the difference as a heatmap
+        fig = plt.figure(figsize=(8, 6))
+        plt.contourf(X, T, u_diff, levels=50, cmap="coolwarm")
+        plt.colorbar(label="Absolute Difference $|u_{\text{pred}} - u_{\text{true}}|$")
+        plt.xlabel("x")
+        plt.ylabel("t")
+        plt.title("Difference Between Predicted and Ground Truth $u(x, t)$")
+        plt.savefig("comparison_u_difference.png")
+        plt.close(fig)
