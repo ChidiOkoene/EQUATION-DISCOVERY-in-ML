@@ -1,0 +1,15 @@
+Training Error u: 9.954609e-01 
+Validation Error u: 9.954774e-01 
+Training time: 1344.3364 
+Full Field Error u: 9.954643e-01 
+Training Error u: 9.954609e-01 
+Validation Error u: 9.954774e-01 
+Training time: 1295.2999 
+Full Field Error u: 9.954643e-01 
+Cosine similarity of lambda: 0.00 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000001e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: u_t = 1.42455e-051+-2.1296842e-06u+-3.7237103e-05u**2+-0.00028098386u**3+-6.0414723e-10u_l+-3.0874905e-09u*u_l+-3.447102e-08u**2*u_l+-1.7629692e-07u**3*u_l+-1.1485457e-11u_ll+1.2206326e-11u*u_ll+-8.110736e-12u**2*u_ll+3.7389248e-11u**3*u_ll+1.1498808e-11u_lll+-1.1498663e-11u*u_lll+1.1499234e-11u**2*u_lll+-1.14862295e-11u**3*u_lll+-1.9070959e-06u_p+-1.2690111e-05u*u_p+-0.00013951462u**2*u_p+-0.00071507896u**3*u_p+2.7776886e-07u_pp+1.3642276e-05u*u_pp+6.6737324e-05u**2*u_pp+0.0005290565u**3*u_pp+2.579691e-06u_ppp+9.123252e-06u*u_ppp+2.7815968e-05u**2*u_ppp+0.0009308583u**3*u_ppp+-2.0823392e-09u_tm+-8.943449e-09u*u_tm+-1.00470565e-07u**2*u_tm+-5.8028553e-07u**3*u_tm+1.1655632e-11u_tmtm+1.8211347e-11u*u_tmtm+4.585818e-11u**2*u_tmtm+3.091521e-10u**3*u_tmtm+-1.1497917e-11u_tmtmtm+1.1501534e-11u*u_tmtmtm+-1.1490211e-11u**2*u_tmtmtm+1.1789998e-11u**3*u_tmtmtm
