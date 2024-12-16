@@ -1,0 +1,5 @@
+Complexity,Loss,Equation
+1,6.726667e7,"currentTime"
+3,34421.305,"Lookup_Table - POS_MEASUREREV"
+5,34320.664,"(Lookup_Table - POS_MEASUREREV) - POS_MEASUREREV"
+7,34269.04,"((6.696254 + Lookup_Table) - POS_MEASUREREV) + 5.235188"

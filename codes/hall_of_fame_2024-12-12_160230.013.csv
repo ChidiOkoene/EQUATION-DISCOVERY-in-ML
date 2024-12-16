@@ -1,0 +1,10 @@
+Complexity,Loss,Equation
+1,34532.8,"Lookup_Table"
+3,34411.34,"Lookup_Table + 9.38096"
+4,32889.875,"abs(Lookup_Table - currentTime)"
+6,26222.11,"abs((TMC_filtered * 1.55337) + TMC_filtered)"
+8,24427.012,"abs(TMC_filtered + (TMC_filtered * (0.87178797 - -0.70548695)))"
+9,23722.266,"abs(abs((TMC_filtered * 1.55337) + (30.585377 + TMC_filtered)))"
+10,22710.025,"abs((TMC_filtered - currentTime) + (TMC_filtered * (0.87178797 - -0.70548695)))"
+13,22454.436,"abs(abs((TMC_filtered + (TMC_filtered - currentTime)) + (TMC_filtered * (-0.01095444 - -0.582756))))"
+14,22444.79,"abs((TMC_filtered + (TMC_filtered - currentTime)) + (TMC_filtered * (-0.01095444 - -0.582756))) + 0.7356932"

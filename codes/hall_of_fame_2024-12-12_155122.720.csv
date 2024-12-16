@@ -1,0 +1,5 @@
+Complexity,Loss,Equation
+2,6.74417e7,"sin(-0.5344271)"
+3,34013.08,"Lookup_Table * 0.99757373"
+5,24012.277,"TMC_filtered + (TMC_filtered / 0.63950235)"
+7,22515.906,"((TMC_filtered + 41.92712) + TMC_filtered) / 0.78097725"

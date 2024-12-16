@@ -1,0 +1,7 @@
+Complexity,Loss,Equation
+1,2.5169568e7,"TMC_filtered"
+3,34410.508,"Lookup_Table + 9.634516"
+5,24091.31,"(TMC_filtered / 0.3883088) + 0.8820939"
+6,23925.217,"(TMC_filtered + TMC_filtered) / cos(0.67637026)"
+7,23731.979,"(TMC_filtered + (TMC_filtered / 1.7553709)) + TMC_filtered"
+10,22709.744,"(sin(POS_MEASUREREV) - ((TMC_filtered - -14.167629) * 1.2071424)) * -2.128125"

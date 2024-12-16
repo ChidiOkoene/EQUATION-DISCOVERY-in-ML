@@ -1,0 +1,9 @@
+Complexity,Loss,Equation
+1,6.726667e7,"currentTime"
+2,34532.8,"abs(Lookup_Table)"
+3,27487.535,"2.5881848 * TMC_filtered"
+5,27276.318,"TMC_filtered * exp(cos(0.35904235))"
+6,23916.832,"abs(TMC_filtered * exp(cos(0.34273925)))"
+7,23747.12,"abs(TMC_filtered * exp(cos(sin(0.34273925))))"
+8,22745.262,"62.06502 + (exp(cos(-0.3504679)) * abs(TMC_filtered))"
+10,22462.787,"(TMC_filtered * exp(square(cos(0.24553113)))) + square(square(2.653646))"

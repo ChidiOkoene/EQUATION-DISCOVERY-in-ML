@@ -1,0 +1,157 @@
+Training Error u: nan 
+Validation Error u: nan 
+Full Field Error u: nan 
+Training time: 1105.6440 
+Training Error u: 9.999995e-01 
+Validation Error u: 9.999993e-01 
+Full Field Error u: 9.999995e-01 
+Training time: 8.5964 
+Full Field Error u: 9.999995e-01 
+Cosine similarity of lambda: nan 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000000e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: u = Training Error u: 9.999844e-01 
+Validation Error u: 9.999875e-01 
+Full Field Error u: 9.999850e-01 
+Training time: 5.1672 
+Full Field Error u: 9.999850e-01 
+Cosine similarity of lambda: nan 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000000e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: u = Training Error u: 9.999844e-01 
+Validation Error u: 9.999875e-01 
+Full Field Error u: 9.999850e-01 
+Training time: 6.0785 
+Full Field Error u: 9.999850e-01 
+Cosine similarity of lambda: nan 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000000e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: u = Training Error u: 9.999844e-01 
+Validation Error u: 9.999875e-01 
+Full Field Error u: 9.999850e-01 
+Training time: 5.4571 
+Full Field Error u: 9.999850e-01 
+Cosine similarity of lambda: nan 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000000e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: u = Training Error u: 9.999995e-01 
+Validation Error u: 9.999993e-01 
+Full Field Error u: 9.999995e-01 
+Training time: 9.1420 
+Full Field Error u: 9.999995e-01 
+Cosine similarity of lambda: nan 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000000e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: u = Training Error u: 9.999995e-01 
+Validation Error u: 9.999993e-01 
+Full Field Error u: 9.999995e-01 
+Training time: 82.1823 
+Full Field Error u: 9.999995e-01 
+Cosine similarity of lambda: nan 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000000e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: u = Training Error u: 9.965580e-01 
+Validation Error u: 9.965655e-01 
+Training time: 901.9062 
+Full Field Error u: 9.965595e-01 
+Cosine similarity of lambda: -0.00 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000001e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: u = 0.000152171751+3.510932e-07u_t+0.00063457375u**2+0.0014256269u**3+1.1088177e-08u_l+2.1362442e-08u*u_l+3.775397e-08u**2*u_l+8.1407606e-08u**3*u_l+7.7144775e-12u_ll+-8.522119e-12u*u_ll+6.842299e-12u**2*u_ll+-1.0668758e-11u**3*u_ll+-8.034742e-12u_lll+8.0346745e-12u*u_lll+-8.034784e-12u**2*u_lll+8.0345895e-12u**3*u_lll+4.5605717e-05u_p+8.935442e-05u*u_p+0.00015155983u**2*u_p+0.00032275027u**3*u_p+-7.0155843e-06u_pp+-1.0009313e-05u*u_pp+-2.3351176e-05u**2*u_pp+-5.0327777e-05u**3*u_pp+-1.3160583e-06u_ppp+-1.6109759e-06u*u_ppp+-1.8814413e-06u**2*u_ppp+-2.0551422e-06u**3*u_ppp+2.9717498e-08u_tm+5.4790515e-08u*u_tm+9.778328e-08u**2*u_tm+2.0954514e-07u**3*u_tm+6.0237262e-12u_tmtm+4.8065224e-12u*u_tmtm+4.2243742e-13u**2*u_tmtm+-8.599751e-12u**3*u_tmtm+8.03443e-12u_tmtmtm+-8.035114e-12u*u_tmtmtm+8.034111e-12u**2*u_tmtmtm+-8.035733e-12u**3*u_tmtmtm
+Training Error u: 9.971830e-01 
+Validation Error u: 9.971835e-01 
+Training time: 2149.4451 
+Full Field Error u: 9.971831e-01 
+Cosine similarity of lambda: -0.01 
+lambda5_error: 100.01% 
+lambda8_error: 100.01% 
+Lambda L2 Error: 1.000074e+00 
+lambda_error_mean: 100.01% 
+lambda_error_std: 0.00% 
+The discovered equation: u = -2.3464116e-051+-7.4825294e-07u_t+0.0002987438u**2+0.0031056379u**3+6.021329e-06u_l+6.366225e-05u*u_l+0.00036699534u**2*u_l+0.0026344336u**3*u_l+-5.2768146e-06u_ll+-1.5364662e-05u*u_ll+-9.422086e-05u**2*u_ll+-0.0003947572u**3*u_ll+-1.4792809e-06u_lll+-1.1625589e-05u*u_lll+-6.187965e-05u**2*u_lll+-0.00051693915u**3*u_lll+1.925275e-06u_p+4.976949e-05u*u_p+0.00026427748u**2*u_p+0.0018793938u**3*u_p+-3.729729e-06u_pp+-8.789928e-06u*u_pp+-5.3831118e-05u**2*u_pp+-0.00023573576u**3*u_pp+-4.0418504e-07u_ppp+-5.598822e-06u*u_ppp+-2.8400316e-05u**2*u_ppp+-0.00024189411u**3*u_ppp+1.6032882e-06u_tm+4.7098288e-06u*u_tm+3.6995323e-05u**2*u_tm+0.00028927554u**3*u_tm+-8.113439e-07u_tmtm+-1.0561622e-06u*u_tmtm+-1.0823121e-05u**2*u_tmtm+-0.000102687154u**3*u_tmtm+-1.0276268e-07u_tmtmtm+-3.2514567e-08u*u_tmtmtm+-1.12014014e-07u**2*u_tmtmtm+2.9594148e-06u**3*u_tmtmtmTraining Error u: 9.954609e-01 
+Validation Error u: 9.954774e-01 
+Training time: 2220.8991 
+Full Field Error u: 9.954643e-01 
+Cosine similarity of lambda: 0.00 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000001e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: u_t = 1.4245501e-051+-2.1296853e-06u+-3.723712e-05u**2+-0.000280984u**3+-6.041474e-10u_l+-3.0874912e-09u*u_l+-3.447103e-08u**2*u_l+-1.76297e-07u**3*u_l+-1.14854576e-11u_ll+1.2206327e-11u*u_ll+-8.110735e-12u**2*u_ll+3.738926e-11u**3*u_ll+1.1498808e-11u_lll+-1.1498663e-11u*u_lll+1.1499235e-11u**2*u_lll+-1.148623e-11u**3*u_lll+-1.9070966e-06u_p+-1.2690115e-05u*u_p+-0.00013951464u**2*u_p+-0.000715079u**3*u_p+2.7776892e-07u_pp+1.364228e-05u*u_pp+6.673735e-05u**2*u_pp+0.00052905665u**3*u_pp+2.5796917e-06u_ppp+9.123254e-06u*u_ppp+2.7815962e-05u**2*u_ppp+0.0009308589u**3*u_ppp+-2.0823396e-09u_tm+-8.943451e-09u*u_tm+-1.00470594e-07u**2*u_tm+-5.802857e-07u**3*u_tm+1.1655633e-11u_tmtm+1.8211349e-11u*u_tmtm+4.5858185e-11u**2*u_tmtm+3.0915215e-10u**3*u_tmtm+-1.1497918e-11u_tmtmtm+1.1501535e-11u*u_tmtmtm+-1.14902116e-11u**2*u_tmtmtm+1.1789999e-11u**3*u_tmtmtm
+Training Error u: 9.954609e-01 
+Validation Error u: 9.954774e-01 
+Training time: 2240.0150 
+Full Field Error u: 9.954643e-01 
+Cosine similarity of lambda: 0.00 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000001e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: u_t = 1.42455065e-051+-2.1296835e-06u+-3.723707e-05u**2+-0.0002809827u**3+-6.041477e-10u_l+-3.0874912e-09u*u_l+-3.4471014e-08u**2*u_l+-1.7629641e-07u**3*u_l+-1.1485462e-11u_ll+1.2206331e-11u*u_ll+-8.110745e-12u**2*u_ll+3.7389144e-11u**3*u_ll+1.1498813e-11u_lll+-1.1498668e-11u*u_lll+1.1499239e-11u**2*u_lll+-1.1486235e-11u**3*u_lll+-1.9070976e-06u_p+-1.2690116e-05u*u_p+-0.0001395146u**2*u_p+-0.00071507704u**3*u_p+2.7776863e-07u_pp+1.36422805e-05u*u_pp+6.673726e-05u**2*u_pp+0.00052905444u**3*u_pp+2.5796937e-06u_ppp+9.123268e-06u*u_ppp+2.7816137e-05u**2*u_ppp+0.000930862u**3*u_ppp+-2.0823407e-09u_tm+-8.943451e-09u*u_tm+-1.0047057e-07u**2*u_tm+-5.802843e-07u**3*u_tm+1.1655637e-11u_tmtm+1.8211354e-11u*u_tmtm+4.5858154e-11u**2*u_tmtm+3.09151e-10u**3*u_tmtm+-1.1497923e-11u_tmtmtm+1.1501539e-11u*u_tmtmtm+-1.1490216e-11u**2*u_tmtmtm+1.1790004e-11u**3*u_tmtmtm
+Training Error u: 9.958065e-01 
+Validation Error u: 9.959002e-01 
+Training time: 909.7169 
+Full Field Error u: 9.958260e-01 
+Cosine similarity of lambda: -0.06 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000022e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: u_t = 0.000261836661+5.069983e-05u+9.7167125e-05u**2+0.00017293694u**3+3.172925e-05u_l+2.158727e-05u*u_l+3.7352125e-05u**2*u_l+6.842375e-05u**3*u_l+-1.2625936e-06u_ll+-3.6920446e-06u*u_ll+-6.65213e-06u**2*u_ll+-1.4922234e-05u**3*u_ll+-5.1324664e-06u_lll+-2.5860863e-06u*u_lll+-4.0465525e-06u**2*u_lll+-6.608662e-06u**3*u_lll+6.203832e-05u_p+3.3081258e-05u*u_p+5.6611134e-05u**2*u_p+0.000101409285u**3*u_p+-2.243166e-06u_pp+-7.2935113e-06u*u_pp+-1.2641173e-05u**2*u_pp+-2.7683629e-05u**3*u_pp+-8.397328e-06u_ppp+-4.360781e-06u*u_ppp+-5.5924424e-06u**2*u_ppp+-7.422977e-06u**3*u_ppp+2.3443616e-05u_tm+2.772909e-05u*u_tm+4.7026075e-05u**2*u_tm+8.637565e-05u**3*u_tm+-1.5040962e-06u_tmtm+-4.182502e-06u*u_tmtm+-7.6137267e-06u**2*u_tmtm+-1.6757085e-05u**3*u_tmtm+-7.5740337e-07u_tmtmtm+-2.27655e-06u*u_tmtmtm+-3.199224e-06u**2*u_tmtmtm+-4.9893843e-06u**3*u_tmtmtm
+Training Error u: 9.958918e-01 
+Validation Error u: 9.959845e-01 
+Training time: 1397.1992 
+Full Field Error u: 9.959111e-01 
+Cosine similarity of lambda: -0.06 
+lambda5_error: 100.01% 
+lambda8_error: 100.01% 
+Lambda L2 Error: 1.000081e+00 
+lambda_error_mean: 100.01% 
+lambda_error_std: 0.00% 
+The discovered equation: u_t = 0.000100748641+0.0002227999u+0.00040704108u**2+0.00094753905u**3+4.197734e-05u_l+7.983332e-05u*u_l+0.00015609592u**2*u_l+0.00033942252u**3*u_l+-8.128892e-06u_ll+-1.4809466e-05u*u_ll+-3.4477955e-05u**2*u_ll+-6.42981e-05u**3*u_ll+-4.861003e-06u_lll+-8.48503e-06u*u_lll+-1.6795215e-05u**2*u_lll+-6.980439e-05u**3*u_lll+6.195225e-05u_p+0.00011619435u*u_p+0.00021915078u**2*u_p+0.00046850526u**3*u_p+-1.7073082e-05u_pp+-2.8881801e-05u*u_pp+-6.478046e-05u**2*u_pp+-0.000115157614u**3*u_pp+-6.5892004e-06u_ppp+-8.345408e-06u*u_ppp+-1.5510794e-05u**2*u_ppp+-0.00012261409u**3*u_ppp+5.2431253e-05u_tm+9.618297e-05u*u_tm+0.00018946863u**2*u_tm+0.00040723427u**3*u_tm+-9.313414e-06u_tmtm+-1.7298506e-05u*u_tmtm+-3.858929e-05u**2*u_tmtm+-5.9184422e-05u**3*u_tmtm+-3.7790803e-06u_tmtmtm+-5.573605e-06u*u_tmtmtm+-1.3969224e-05u**2*u_tmtmtm+-0.000108256776u**3*u_tmtmtm
+Training Error u: 9.862192e-01 
+Validation Error u: 9.865184e-01 
+Training time: 8943.0745 
+Full Field Error u: 9.862814e-01 
+Cosine similarity of lambda: -0.07 
+lambda5_error: 100.01% 
+lambda8_error: 100.01% 
+Lambda L2 Error: 1.000056e+00 
+lambda_error_mean: 100.01% 
+lambda_error_std: 0.00% 
+The discovered equation: u = 5.5827895e-051+2.4366127e-05u_t+0.00023452699u**2+0.0005437345u**3+2.8993507e-05u_l+5.504123e-05u*u_l+0.00010446674u**2*u_l+0.00022748584u**3*u_l+-9.282388e-06u_ll+-1.5946762e-05u*u_ll+-3.7102596e-05u**2*u_ll+-8.795523e-05u**3*u_ll+-2.9963178e-06u_lll+-3.6707916e-06u*u_lll+-3.4476848e-06u**2*u_lll+-1.0386975e-06u**3*u_lll+2.373132e-05u_p+4.245239e-05u*u_p+8.482102e-05u**2*u_p+0.0001836691u**3*u_p+-6.9127973e-06u_pp+-1.1992648e-05u*u_pp+-2.8346065e-05u**2*u_pp+-6.7443514e-05u**3*u_pp+-2.936764e-06u_ppp+-3.6504825e-06u*u_ppp+-4.8919887e-06u**2*u_ppp+-5.609026e-06u**3*u_ppp+3.0581043e-05u_tm+5.6292633e-05u*u_tm+0.000110325986u**2*u_tm+0.00024028745u**3*u_tm+-8.296285e-06u_tmtm+-1.5530686e-05u*u_tmtm+-3.60343e-05u**2*u_tmtm+-8.511656e-05u**3*u_tmtm+-3.2984965e-06u_tmtmtm+-3.9800193e-06u*u_tmtmtm+-4.2321594e-06u**2*u_tmtmtm+-2.6514642e-06u**3*u_tmtmtm
+Training Error u: 9.921400e-01 
+Validation Error u: 9.923139e-01 
+Training time: 15516.9732 
+Full Field Error u: 9.921762e-01 
+Cosine similarity of lambda: -0.04 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000035e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: u = 4.8766247e-051+-1.0891476e-06u_t+0.00016426785u**2+0.0002527478u**3+2.118442e-05u_l+3.514611e-05u*u_l+5.12972e-05u**2*u_l+-8.180429e-05u**3*u_l+-2.8788054e-06u_ll+-4.338357e-06u*u_ll+7.236517e-06u**2*u_ll+0.00022403013u**3*u_ll+-1.9947165e-06u_lll+-4.6361242e-06u*u_lll+-2.82847e-05u**2*u_lll+-0.00031152886u**3*u_lll+2.0145437e-05u_p+3.359856e-05u*u_p+4.973481e-05u**2*u_p+-6.736958e-05u**3*u_p+-2.5824468e-06u_pp+-3.5400587e-06u*u_pp+8.99896e-06u**2*u_pp+0.00022393174u**3*u_pp+-1.6398654e-06u_ppp+-4.297785e-06u*u_ppp+-2.9754978e-05u**2*u_ppp+-0.00033675382u**3*u_ppp+2.8526025e-05u_tm+4.7545927e-05u*u_tm+7.0816284e-05u**2*u_tm+-9.497838e-05u**3*u_tm+-3.402758e-06u_tmtm+-4.9424693e-06u*u_tmtm+1.1873011e-05u**2*u_tmtm+0.00030810264u**3*u_tmtm+-2.4046035e-06u_tmtmtm+-5.9893196e-06u*u_tmtmtm+-4.0493687e-05u**2*u_tmtmtm+-0.00045939971u**3*u_tmtmtm

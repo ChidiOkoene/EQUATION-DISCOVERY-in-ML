@@ -1,0 +1,8 @@
+Complexity,Loss,Equation
+2,6.7429896e7,"cos(-0.34548393)"
+3,34409.453,"Lookup_Table + 10.030992"
+4,24205.676,"TMC_filtered / sin(0.3987021)"
+6,23844.832,"(TMC_filtered / sin(0.40023038)) - POS_MEASUREREV"
+7,23719.582,"(TMC_filtered / sin(0.40023038)) + cos(-489.98773)"
+8,23719.572,"(TMC_filtered / sin(0.40023038)) + cos(sin(-489.98773))"
+9,22433.791,"(TMC_filtered / sin(sin(0.4125783))) + (24.543417 + 23.0152)"

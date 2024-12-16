@@ -1,0 +1,13 @@
+Complexity,Loss,Equation
+1,6.742326e7,"TMC_filtered"
+2,6.087963e7,"cube(19.311098)"
+3,1.6473944e7,"7138.9033 * TMC_filtered"
+4,4.4357355e6,"square(POS_MEASUREREV / 0.015050223)"
+5,22406.668,"4055.6584 + (7138.9033 * TMC_filtered)"
+7,22306.088,"(disc_heating_BTM_FL - -7141.087) * (TMC_filtered - -0.5678018)"
+8,21854.748,"((cube(disc_heating_BTM_FL) - -7135.515) * TMC_filtered) - -4053.1355"
+9,19629.146,"((TMC_filtered - -0.5661931) * 7214.616) - (11.999268 ^ TMC_filtered)"
+10,18904.098,"(TMC_filtered - -0.56758046) * ((sin(POS_MEASUREREV) * 410.27383) - -6788.2993)"
+12,18582.654,"(TMC_filtered - -0.5678018) * ((sin(POS_MEASUREREV + 0.16513719) * 410.27383) - -6788.2993)"
+13,17954.074,"(4042.239 - (TMC_filtered * -7150.0254)) - (cube(square(exp(cos(TMC_filtered)))) * disc_heating_BTM_FL)"
+14,16530.445,"(TMC_filtered - -0.56758046) * (((sin(POS_MEASUREREV) - (TMC_filtered - POS_MEASUREREV)) * 410.27383) - -6788.2993)"

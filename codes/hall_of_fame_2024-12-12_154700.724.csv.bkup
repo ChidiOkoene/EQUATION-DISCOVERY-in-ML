@@ -1,0 +1,5 @@
+Complexity,Loss,Equation
+1,6.743517e7,"0.29368523"
+3,34421.305,"Lookup_Table - POS_MEASUREREV"
+5,32466.19,"Lookup_Table - (POS_MEASUREREV * currentTime)"
+7,22130.402,"((0.21869189 * Lookup_Table) + TMC_filtered) + TMC_filtered"

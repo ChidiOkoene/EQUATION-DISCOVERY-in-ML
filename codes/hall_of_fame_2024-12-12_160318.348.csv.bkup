@@ -1,0 +1,6 @@
+Complexity,Loss,Equation
+1,34532.8,"Lookup_Table"
+3,23865.672,"TMC_filtered / 0.38981533"
+5,22771.754,"(TMC_filtered / 0.38981533) - -54.99567"
+7,22353.64,"(TMC_filtered / 0.38981533) - (-54.99567 + currentTime)"
+9,22225.307,"(TMC_filtered / 0.38981533) - ((-54.99567 + currentTime) * 1.3994164)"

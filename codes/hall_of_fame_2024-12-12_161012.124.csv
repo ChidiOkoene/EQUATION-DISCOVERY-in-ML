@@ -1,0 +1,11 @@
+Complexity,Loss,Equation
+1,34532.8,"Lookup_Table"
+3,23764.332,"TMC_filtered / 0.38954565"
+5,22503.691,"(TMC_filtered / 0.39065126) - -52.155945"
+6,22092.05,"(TMC_filtered / 0.38488907) - exp(POS_MEASUREREV)"
+8,21980.926,"((TMC_filtered - POS_MEASUREREV) / 0.38488907) - exp(POS_MEASUREREV)"
+9,21626.28,"((TMC_filtered - inv(-0.12640305)) / 0.38488907) - exp(POS_MEASUREREV)"
+10,21626.178,"((TMC_filtered - inv(sin(-0.12640305))) / 0.38488907) - exp(POS_MEASUREREV)"
+11,21526.293,"(((TMC_filtered - inv(-0.12640305)) / 0.38488907) - POS_MEASUREREV) - exp(POS_MEASUREREV)"
+12,21236.47,"((TMC_filtered - inv(-0.12640305 + sqrt(POS_MEASUREREV))) / 0.38488907) - exp(POS_MEASUREREV)"
+14,20755.434,"((TMC_filtered - inv(-0.12640305 + sqrt(POS_MEASUREREV))) / 0.3830779) - exp(POS_MEASUREREV - -0.514105)"

@@ -1,0 +1,13 @@
+Complexity,Loss,Equation
+1,6.050295e7,"7141.0005"
+2,5.11386e7,"square(66.68347)"
+3,1.6473945e7,"TMC_filtered * 7141.0005"
+4,4.3789635e6,"4587.2993 * square(POS_MEASUREREV)"
+5,22407.248,"(TMC_filtered * 7138.79) - -4055.1821"
+7,22313.932,"((7141.0005 + disc_heating_BTM_FL) * TMC_filtered) - -4055.1821"
+8,21871.934,"((7138.79 * TMC_filtered) + 4059.9453) - cube(BrakingTime_2)"
+9,20303.342,"((TMC_filtered * 7170.097) - -4069.7078) - cube(square(TMC_filtered))"
+10,20168.754,"((TMC_filtered * 7155.0815) - -4076.116) - cube(BrakingTime_2 + BrakingTime_2)"
+11,19106.041,"((TMC_filtered * 7088.167) - -3927.6597) - (square(sin(TMC_filtered)) * -365.86142)"
+13,19103.125,"((TMC_filtered * 7088.167) - -3927.6597) - (square(sin(TMC_filtered)) * (disc_heating_BTM_FL + -365.86142))"
+14,16382.086,"(((7244.925 - square(cube(TMC_filtered))) * TMC_filtered) - -4117.441) + (cube(BrakingTime_2) * -13.820959)"
