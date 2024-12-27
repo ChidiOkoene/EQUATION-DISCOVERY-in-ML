@@ -133,7 +133,7 @@ with tf.device('/device:CPU:0'):
             self.f_pred, self.Phi_pred, self.u_t_pred = self.net_f(self.t_f_tf, self.l_f_tf, self.p_f_tf, self.tm_f_tf, X_f.shape[0])
 
             # Loss terms
-            self.loss_u = tf.reduce_mean(tf.square(self.u_tf - self.u_pred))  # Supervised loss (target vs. predicted)
+            self.loss_u = tf.reduce_mean(tf.square(self.u - self.u_pred))  # Supervised loss (target vs. predicted)
             self.loss_f_coeff_tf = tf.compat.v1.placeholder(tf.float32)  # Coefficient for the physics-informed loss
             self.loss_f = self.loss_f_coeff_tf * tf.reduce_mean(tf.square(self.f_pred))  # Physics-informed loss
             self.loss_lambda = 1e-7 * tf.norm(self.lambda1, ord=1)  # Regularization on the lambda terms
@@ -197,7 +197,7 @@ with tf.device('/device:CPU:0'):
                 x0=np.concatenate([v.flatten() for v in self.sess.run(var_list_1)]),
                 jac=grad_fn,
                 method="L-BFGS-B",
-                options={"maxiter": 10000, "maxfun": 10000, "maxcor": 50, "ftol": 1.0 * np.finfo(float).eps},
+                options={"maxiter": 100000, "maxfun": 150000, "maxcor": 300, "ftol": 1.0 * np.finfo(float).eps},
             )
 
             self.optimizer_Pretrain = lambda: minimize(
@@ -205,7 +205,7 @@ with tf.device('/device:CPU:0'):
                 x0=np.concatenate([var.eval(session=self.sess).flatten() for var in self.biases + self.weights + [self.lambda1]]),
                 jac=pretrain_grad_fn,
                 method="L-BFGS-B",
-                options={'maxiter': 10000, 'maxfun': 10000, 'maxcor': 50, 'ftol': 1.0 * np.finfo(float).eps},
+                options={"maxiter": 100000, 'maxfun': 150000, 'maxcor': 300, 'ftol': 1.0 * np.finfo(float).eps},
             )
 
             ######### TensorFlow Initialization #########
@@ -225,45 +225,53 @@ with tf.device('/device:CPU:0'):
             self.global_step = tf.Variable(0, trainable=False)
             starter_learning_rate = 1e-3
             self.learning_rate = tf.compat.v1.train.exponential_decay(starter_learning_rate, self.global_step, 100, 0.75, staircase=True)
-            self.optimizer_Adam = tf.compat.v1.train.AdamOptimizer(learning_rate=1e-3, beta1=0.99, beta2=0.9, epsilon=1e-8)
+            self.optimizer_Adam = tf.compat.v1.train.AdamOptimizer(learning_rate=1e-3, beta1=0.77, beta2=0.7, epsilon=1e-8)
             self.train_op_Adam = self.optimizer_Adam.minimize(self.loss, var_list=var_list_1, global_step=self.global_step)
             
             # Initialize variables before running any session computations
             init = tf.compat.v1.global_variables_initializer()
             self.sess.run(init)  # Ensure all variables are initialized before usage
     
-        def initialize_NN(self, layers):        
+        def initialize_NN(self, layers):
             weights = []
             biases = []
             num_layers = len(layers) 
-            for l in range(0,num_layers-1):
+            for l in range(0, num_layers - 1):
                 W = self.xavier_init(size=[layers[l], layers[l+1]])
-                b = tf.Variable(tf.zeros([1,layers[l+1]], dtype=tf.float32), dtype=tf.float32, name = 'b')
+                b = tf.Variable(tf.zeros([1, layers[l+1]], dtype=tf.float32), dtype=tf.float32, name='b')
                 weights.append(W)
                 biases.append(b)        
             return weights, biases
-            
+                
         def xavier_init(self, size):
             in_dim = size[0]
             out_dim = size[1]        
-            xavier_stddev = np.sqrt(2/(in_dim + out_dim))
-            return tf.Variable(tf.random.truncated_normal([in_dim, out_dim], stddev=xavier_stddev), dtype=tf.float32, name = 'W')
-        
+            xavier_stddev = np.sqrt(2 / (in_dim + out_dim))
+            return tf.Variable(tf.random.truncated_normal([in_dim, out_dim], stddev=xavier_stddev), dtype=tf.float32, name='W')
+
         def neural_net(self, X, weights, biases):
             num_layers = len(weights) + 1
             
-            H = 2.0*(X - self.lb)/(self.ub - self.lb) - 1.0
-            for l in range(0,num_layers-2):
+            # Normalize inputs to range [-1, 1]
+            H = 2.0 * (X - self.lb) / (self.ub - self.lb) - 1.0
+            
+            # Add small noise to inputs to improve variability
+            H += tf.random.normal(tf.shape(H), mean=0.0, stddev=1e-3)
+            
+            # Hidden layers with Leaky ReLU activation
+            for l in range(0, num_layers - 2):
                 W = weights[l]
                 b = biases[l]
-                H = tf.tanh(tf.add(tf.matmul(H, W), b))
+                H = tf.nn.leaky_relu(tf.add(tf.matmul(H, W), b), alpha=0.01)  # Leaky ReLU activation
+
+            # Output layer (no activation)
             W = weights[-1]
             b = biases[-1]
             Y = tf.add(tf.matmul(H, W), b)
             return Y
-                
+
         def net_u(self, t, l, p, tm):  
-            u = self.neural_net(tf.concat([t, l, p, tm],1), self.weights, self.biases)
+            u = self.neural_net(tf.concat([t, l, p, tm], 1), self.weights, self.biases)
             return u
         
         def net_f(self, t, l, p, tm, N_f):
@@ -278,16 +286,16 @@ with tf.device('/device:CPU:0'):
             u_lll = tf.gradients(u_ll, l)[0]
             u_ppp = tf.gradients(u_pp, p)[0]
             u_tmtmtm = tf.gradients(u_tmtm, tm)[0]    
-            Phi = tf.concat([tf.constant(1, shape=[N_f, 1], dtype=tf.float32), u_t, u**2, u**3, u_l, u*u_l, u**2*u_l,
-                                  u**3*u_l, u_ll, u*u_ll, u**2*u_ll, u**3*u_ll, u_lll, u*u_lll, u**2*u_lll, u**3*u_lll,
+            Phi = tf.concat([tf.constant(1, shape=[N_f, 1], dtype=tf.float32), u_t, l, p, u_l, u*u_l, tm,
+                                  u**3*u_l, u_ll, u*u_ll, u**2*u_ll, u**3*u_ll, u_lll, t, u**2*u_lll, u**3*u_lll,
                                     u_p, u*u_p, u**2*u_p, u**3*u_p, u_pp, u*u_pp, u**2*u_pp, u**3*u_pp, u_ppp, u*u_ppp, 
                                     u**2*u_ppp, u**3*u_ppp, u_tm, u*u_tm, u**2*u_tm, u**3*u_tm, u_tmtm, u*u_tmtm, u**2*u_tmtm, 
                                     u**3*u_tmtm, u_tmtmtm, u*u_tmtmtm, u**2*u_tmtmtm, u**3*u_tmtmtm], 1)    
             self.library_description = ['1',
-                         'u_t', 'u**2', 'u**3',
-                         'u_l', 'u*u_l', 'u**2*u_l', 'u**3*u_l',
+                         'u_t', 'l', 'p',
+                         'u_l', 'u*u_l', 'tm', 'u**3*u_l',
                          'u_ll', 'u*u_ll', 'u**2*u_ll', 'u**3*u_ll',
-                         'u_lll', 'u*u_lll', 'u**2*u_lll', 'u**3*u_lll', 'u_p', 'u*u_p', 
+                         'u_lll', 't', 'u**2*u_lll', 'u**3*u_lll', 'u_p', 'u*u_p', 
                          'u**2*u_p', 'u**3*u_p', 'u_pp', 'u*u_pp', 'u**2*u_pp', 'u**3*u_pp', 'u_ppp', 'u*u_ppp', 
                          'u**2*u_ppp', 'u**3*u_ppp', 'u_tm', 'u*u_tm', 'u**2*u_tm', 'u**3*u_tm', 'u_tmtm', 'u*u_tmtm', 'u**2*u_tmtm', 
                          'u**3*u_tmtm', 'u_tmtmtm', 'u*u_tmtmtm', 'u**2*u_tmtmtm', 'u**3*u_tmtmtm']
@@ -396,7 +404,7 @@ with tf.device('/device:CPU:0'):
                 # Loop of Adam optimization
                 print('Adam begins')
                 start_time = time.time()
-                for it_Adam in range(1000):
+                for it_Adam in range(3000):
                     
                     self.sess.run(self.train_op_Adam, self.tf_dict)
                     
@@ -459,9 +467,9 @@ with tf.device('/device:CPU:0'):
             return u_star
         
         def callTrainSTRidge(self):
-            lam = 1e-2
+            lam = 0.8
             d_tol = 1
-            maxit = 10
+            maxit = 100
             STR_iters = 30
             
             l0_penalty = None
@@ -661,7 +669,7 @@ with tf.device('/device:CPU:0'):
         start_time = time.time()
         
       # layers = [2, 20, 20, 20, 20, 20, 20, 20, 20, 1]
-        layers = [4, 80, 80, 80, 1]
+        layers = [4, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 1]
         
 # =============================================================================
 #         load data
@@ -669,7 +677,8 @@ with tf.device('/device:CPU:0'):
         # data = scipy.io.loadmat(os.path.dirname(os.getcwd()) + '\\burgers.mat')
         # data = scipy.io.loadmat(os.path.dirname(os.path.dirname(os.getcwd())) + '\\burgers.mat')
         # Load CSV data
-        data = pd.read_csv("C:/Users/chidi/Downloads/clamping_force_norm1.csv")
+        data = pd.read_csv("C:/Users/chidi/Downloads/clamping_force.csv")
+        data = data.iloc[950:3456]
 
         t = data['currentTime'].values
         p = data['POS_MEASUREREV'].values
@@ -698,7 +707,7 @@ with tf.device('/device:CPU:0'):
         u_val = u_star[val_indices]
 
         # Collocation points
-        N_f = 50000
+        N_f = 5000
         X_f_train = lb + (ub - lb) * lhs(X_star.shape[1], N_f)
         X_f_train = np.vstack((X_f_train, X_u_train))
 
@@ -708,14 +717,14 @@ with tf.device('/device:CPU:0'):
 #         model
 # =============================================================================
         model = PhysicsInformedNN(X_u_train, u_train, X_f_train, X_u_val, u_val, layers, lb, ub)
-        model.train(6)
+        model.train(20)
         
 # =============================================================================
 #         results & diagnostics
 # =============================================================================
         # determine whether the training is sufficient
         
-        f = open("stdout.txt", "a+")
+        f = open("stdout_20_3000.txt", "a+")
                 
         u_train_Pred = model.predict(X_u_train)                
         Error_u_Train = np.linalg.norm(u_train-u_train_Pred,2)/np.linalg.norm(u_train,2)   

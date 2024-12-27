@@ -267,11 +267,7 @@ with tf.device('/device:CPU:0'):
             return u
         
         def net_f(self, t, l, p, tm, N_f):
-            # Normalize inputs for numerical stability
-            t = (t - tf.reduce_mean(t)) / (tf.math.reduce_std(t) + 1e-6)
-            l = (l - tf.reduce_mean(l)) / (tf.math.reduce_std(l) + 1e-6)
-            p = (p - tf.reduce_mean(p)) / (tf.math.reduce_std(p) + 1e-6)
-            tm = (tm - tf.reduce_mean(tm)) / (tf.math.reduce_std(tm) + 1e-6)
+            
 
             # Compute u as a function of the inputs
             u = self.net_u(t, l, p, tm)
@@ -291,14 +287,14 @@ with tf.device('/device:CPU:0'):
             u_tmtmtm = tf.gradients(u_tmtm, tm)[0]
 
             # Logarithmic and inverse terms (avoid log(0) or division by zero)
-            log_t = tf.math.log(t + 1e-6)
-            log_l = tf.math.log(l + 1e-6)
-            log_p = tf.math.log(p + 1e-6)
-            log_tm = tf.math.log(tm + 1e-6)
-            inv_t = 1 / (t + 1e-6)
-            inv_l = 1 / (l + 1e-6)
-            inv_p = 1 / (p + 1e-6)
-            inv_tm = 1 / (tm + 1e-6)
+            log_t = tf.math.log(t)
+            log_l = tf.math.log(l)
+            log_p = tf.math.log(p)
+            log_tm = tf.math.log(tm)
+            inv_t = 1 / (t)
+            inv_l = 1 / (l)
+            inv_p = 1 / (p)
+            inv_tm = 1 / (tm)
 
             # Define the PDE library (Phi) including features and their interactions
             Phi = tf.concat([
@@ -312,7 +308,6 @@ with tf.device('/device:CPU:0'):
                 t ** 2, l ** 2, p ** 2, tm ** 2,  # Squared features
                 log_t, log_l, log_p, log_tm,  # Logarithmic terms
                 inv_t, inv_l, inv_p, inv_tm,  # Inverse terms
-                tf.sin(t), tf.cos(t), tf.exp(t),  # Basis functions (trig and exponential)
                 t * l * p, l * p * tm, t * p * tm,  # Triple interactions
                 t ** 3, l ** 3, p ** 3, tm ** 3,  # Cubic terms
             ], axis=1)
@@ -328,13 +323,12 @@ with tf.device('/device:CPU:0'):
                 't**2', 'l**2', 'p**2', 'tm**2',
                 'log_t', 'log_l', 'log_p', 'log_tm',
                 'inv_t', 'inv_l', 'inv_p', 'inv_tm',
-                'sin(t)', 'cos(t)', 'exp(t)',
                 't*l*p', 'l*p*tm', 't*p*tm',
                 't**3', 'l**3', 'p**3', 'tm**3'
             ]
 
             # Define the residual of the PDE
-            f = u - tf.matmul(Phi, self.lambda1)  # Residual for discovering u
+            f = tf.matmul(Phi, self.lambda1) - u  # Residual for discovering u
 
             return f, Phi, u
         

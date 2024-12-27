@@ -1,0 +1,11 @@
+Training Error u: 4.730379e-02 
+Validation Error u: 4.711485e-02 
+Training time: 24688.4127 
+Full Field Error u: 4.726553e-02 
+Cosine similarity of lambda: -0.00 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.003978e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: u = 7.0354854e-061+2.7337146e-10u_t+0.083473325l+2.1714915e-05p+2.9226055e-13u_l+9.702353e-13u*u_l+0.03292004tm+8.286069e-13u**3*u_l+9.597494e-05t+8.127936e-10u_p+-4.704531e-10u*u_p+-4.990895e-10u**2*u_p+-3.1191508e-10u**3*u_p+1.1364885e-12u_tm+-2.6416797e-13u*u_tm+7.972273e-13u**2*u_tm+-6.420079e-13u**3*u_tm
