@@ -1,0 +1,22 @@
+Training Error u: 4.669883e-02 
+Validation Error u: 4.574893e-02 
+Training time: 33908.5364 
+Full Field Error u: 4.650964e-02 
+Cosine similarity of lambda: -0.00 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.019117e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: u = 1.5188348e-051+1.6525087e-10u_t+0.1831486l+3.722237e-05p+-3.9489383e-13u_l+1.1514145e-12u*u_l+0.07377297tm+1.2742875e-12u**3*u_l+0.00030089926t+6.3341166e-10u_p+-6.874611e-10u*u_p+-6.816101e-10u**2*u_p+2.0873447e-10u**3*u_p+7.8786126e-13u_tm+-6.9706106e-13u*u_tm+1.1460641e-12u**2*u_tm+-2.6417768e-13u**3*u_tm
+Training Error u: 3.921962e-01 
+Validation Error u: 3.812170e-01 
+Training time: 54847.1858 
+Full Field Error u: 3.902449e-01 
+Cosine similarity of lambda: -0.00 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.006459e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: u = 2.4568511e-051+5.881737e-11u_t+0.10073231l+3.450707e-05p+-2.1866688e-12u_l+2.4955767e-12u*u_l+0.054239348tm+-2.6588496e-09u**3*u_l+0.00042282068t+5.1172586e-09u_p+6.776947e-11u*u_p+5.249007e-10u**2*u_p+7.947603e-07u**3*u_p+-3.3300786e-12u_tm+-4.687298e-12u*u_tm+-4.3398282e-13u**2*u_tm+-1.3589099e-09u**3*u_tm

@@ -717,14 +717,14 @@ with tf.device('/device:CPU:0'):
 #         model
 # =============================================================================
         model = PhysicsInformedNN(X_u_train, u_train, X_f_train, X_u_val, u_val, layers, lb, ub)
-        model.train(6)
+        model.train(7)
         
 # =============================================================================
 #         results & diagnostics
 # =============================================================================
         # determine whether the training is sufficient
         
-        f = open("stdout_6_5000.txt", "a+")
+        f = open("stdout_7_5000.txt", "a+")
                 
         u_train_Pred = model.predict(X_u_train)                
         Error_u_Train = np.linalg.norm(u_train-u_train_Pred,2)/np.linalg.norm(u_train,2)   

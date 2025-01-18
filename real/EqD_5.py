@@ -38,7 +38,7 @@ with tf.device('/device:CPU:0'):
     loss_u_history_Adam = np.array([0])
     loss_f_history_Adam = np.array([0])
     loss_lambda_history_Adam = np.array([0])
-    lambda_history_Adam = np.zeros((40,1))  
+    lambda_history_Adam = np.zeros((30,1))  
     loss_history_Adam_val = np.array([0])
     loss_u_history_Adam_val = np.array([0])
     loss_f_history_Adam_val = np.array([0])
@@ -49,9 +49,9 @@ with tf.device('/device:CPU:0'):
     loss_lambda_history_STRidge = np.array([0])
     optimaltol_history = np.array([0])   
     tol_history_STRidge = np.array([0])
-    lambda_normalized_history_STRidge = np.zeros((40,1))
+    lambda_normalized_history_STRidge = np.zeros((30,1))
     
-    lambda_history_STRidge = np.zeros((40,1))
+    lambda_history_STRidge = np.zeros((30,1))
     ridge_append_counter_STRidge = np.array([0])
     
     # Loss histories for pretraining
@@ -64,7 +64,7 @@ with tf.device('/device:CPU:0'):
     loss_f_history_val_Pretrain = np.array([0])
     step_Pretrain = 0
     
-    lambda_history_Pretrain = np.zeros((40,1))  
+    lambda_history_Pretrain = np.zeros((30,1))  
      
     np.random.seed(1234)
     tf.compat.v1.set_random_seed(1234)
@@ -92,7 +92,7 @@ with tf.device('/device:CPU:0'):
             self.sess = tf.compat.v1.Session(config=config)
             
             # Initialize parameters
-            self.lambda1 = tf.Variable(tf.zeros([40, 1], dtype=tf.float32), dtype=tf.float32, name='lambda')
+            self.lambda1 = tf.Variable(tf.zeros([30, 1], dtype=tf.float32), dtype=tf.float32, name='lambda')
             
             # Specify the list of trainable variables 
             var_list_1 = self.biases + self.weights
@@ -133,7 +133,7 @@ with tf.device('/device:CPU:0'):
             self.f_pred, self.Phi_pred, self.u_t_pred = self.net_f(self.t_f_tf, self.l_f_tf, self.p_f_tf, self.tm_f_tf, X_f.shape[0])
 
             # Loss terms
-            self.loss_u = tf.reduce_mean(tf.square(self.u_tf - self.u_pred))  # Supervised loss (target vs. predicted)
+            self.loss_u = tf.reduce_mean(tf.square(self.u - self.u_pred))  # Supervised loss (target vs. predicted)
             self.loss_f_coeff_tf = tf.compat.v1.placeholder(tf.float32)  # Coefficient for the physics-informed loss
             self.loss_f = self.loss_f_coeff_tf * tf.reduce_mean(tf.square(self.f_pred))  # Physics-informed loss
             self.loss_lambda = 1e-7 * tf.norm(self.lambda1, ord=1)  # Regularization on the lambda terms
@@ -197,7 +197,7 @@ with tf.device('/device:CPU:0'):
                 x0=np.concatenate([v.flatten() for v in self.sess.run(var_list_1)]),
                 jac=grad_fn,
                 method="L-BFGS-B",
-                options={"maxiter": 1000, "maxfun": 1000, "maxcor": 50, "ftol": 1.0 * np.finfo(float).eps},
+                options={"maxiter": 100000, "maxfun": 150000, "maxcor": 300, "ftol": 1.0 * np.finfo(float).eps},
             )
 
             self.optimizer_Pretrain = lambda: minimize(
@@ -205,7 +205,7 @@ with tf.device('/device:CPU:0'):
                 x0=np.concatenate([var.eval(session=self.sess).flatten() for var in self.biases + self.weights + [self.lambda1]]),
                 jac=pretrain_grad_fn,
                 method="L-BFGS-B",
-                options={'maxiter': 10000, 'maxfun': 10000, 'maxcor': 50, 'ftol': 1.0 * np.finfo(float).eps},
+                options={"maxiter": 100000, 'maxfun': 150000, 'maxcor': 300, 'ftol': 1.0 * np.finfo(float).eps},
             )
 
             ######### TensorFlow Initialization #########
@@ -223,78 +223,88 @@ with tf.device('/device:CPU:0'):
                 
             ######### Adam Optimizer for additional training #########################
             self.global_step = tf.Variable(0, trainable=False)
-            starter_learning_rate = 1e-3
-            self.learning_rate = tf.compat.v1.train.exponential_decay(starter_learning_rate, self.global_step, 100, 0.75, staircase=True)
-            self.optimizer_Adam = tf.compat.v1.train.AdamOptimizer(learning_rate=1e-3, beta1=0.99, beta2=0.9, epsilon=1e-8)
+            starter_learning_rate = 3e-3
+            self.learning_rate = tf.compat.v1.train.exponential_decay(starter_learning_rate, self.global_step, 1000, 0.75, staircase=True)
+            self.optimizer_Adam = tf.compat.v1.train.AdamOptimizer(learning_rate=3e-3, beta1=0.77, beta2=0.7, epsilon=1e-8)
             self.train_op_Adam = self.optimizer_Adam.minimize(self.loss, var_list=var_list_1, global_step=self.global_step)
             
             # Initialize variables before running any session computations
             init = tf.compat.v1.global_variables_initializer()
             self.sess.run(init)  # Ensure all variables are initialized before usage
     
-        def initialize_NN(self, layers):        
+        def initialize_NN(self, layers):
             weights = []
             biases = []
             num_layers = len(layers) 
-            for l in range(0,num_layers-1):
+            for l in range(0, num_layers - 1):
                 W = self.xavier_init(size=[layers[l], layers[l+1]])
-                b = tf.Variable(tf.zeros([1,layers[l+1]], dtype=tf.float32), dtype=tf.float32, name = 'b')
+                b = tf.Variable(tf.zeros([1, layers[l+1]], dtype=tf.float32), dtype=tf.float32, name='b')
                 weights.append(W)
                 biases.append(b)        
             return weights, biases
-            
+                
         def xavier_init(self, size):
             in_dim = size[0]
             out_dim = size[1]        
-            xavier_stddev = np.sqrt(2/(in_dim + out_dim))
-            return tf.Variable(tf.random.truncated_normal([in_dim, out_dim], stddev=xavier_stddev), dtype=tf.float32, name = 'W')
-        
+            xavier_stddev = np.sqrt(2 / (in_dim + out_dim))
+            return tf.Variable(tf.random.truncated_normal([in_dim, out_dim], stddev=xavier_stddev), dtype=tf.float32, name='W')
+
         def neural_net(self, X, weights, biases):
             num_layers = len(weights) + 1
             
-            H = 2.0*(X - self.lb)/(self.ub - self.lb) - 1.0
-            for l in range(0,num_layers-2):
+            # Normalize inputs to range [-1, 1]
+            H = 2.0 * (X - self.lb) / (self.ub - self.lb) - 1.0
+            
+            # Add small noise to inputs to improve variability
+            H += tf.random.normal(tf.shape(H), mean=0.0, stddev=1e-3)
+            
+            # Hidden layers with Leaky ReLU activation
+            for l in range(0, num_layers - 2):
                 W = weights[l]
                 b = biases[l]
-                H = tf.tanh(tf.add(tf.matmul(H, W), b))
+                H = tf.nn.leaky_relu(tf.add(tf.matmul(H, W), b), alpha=0.01)  # Leaky ReLU activation
+
+            # Output layer (no activation)
             W = weights[-1]
             b = biases[-1]
             Y = tf.add(tf.matmul(H, W), b)
             return Y
-                
+
         def net_u(self, t, l, p, tm):  
-            u = self.neural_net(tf.concat([t, l, p, tm],1), self.weights, self.biases)
+            u = self.neural_net(tf.concat([t, l, p, tm], 1), self.weights, self.biases)
             return u
         
         def net_f(self, t, l, p, tm, N_f):
             u = self.net_u(t, l, p, tm)
-            u_t = tf.gradients(u, t)[0]
-            u_l = tf.gradients(u, l)[0]
-            u_p = tf.gradients(u, p)[0]
-            u_tm = tf.gradients(u, tm)[0]
-            u_ll = tf.gradients(u_l, l)[0]
-            u_pp = tf.gradients(u_p, p)[0]
-            u_tmtm = tf.gradients(u_tm, tm)[0]
-            u_lll = tf.gradients(u_ll, l)[0]
-            u_ppp = tf.gradients(u_pp, p)[0]
-            u_tmtmtm = tf.gradients(u_tmtm, tm)[0]    
-            Phi = tf.concat([tf.constant(1, shape=[N_f, 1], dtype=tf.float32), u_t, u**2, u**3, u_l, u*u_l, u**2*u_l,
-                                  u**3*u_l, u_ll, u*u_ll, u**2*u_ll, u**3*u_ll, u_lll, u*u_lll, u**2*u_lll, u**3*u_lll,
-                                    u_p, u*u_p, u**2*u_p, u**3*u_p, u_pp, u*u_pp, u**2*u_pp, u**3*u_pp, u_ppp, u*u_ppp, 
-                                    u**2*u_ppp, u**3*u_ppp, u_tm, u*u_tm, u**2*u_tm, u**3*u_tm, u_tmtm, u*u_tmtm, u**2*u_tmtm, 
-                                    u**3*u_tmtm, u_tmtmtm, u*u_tmtmtm, u**2*u_tmtmtm, u**3*u_tmtmtm], 1)    
-            self.library_description = ['1',
-                         'u_t', 'u**2', 'u**3',
-                         'u_l', 'u*u_l', 'u**2*u_l', 'u**3*u_l',
-                         'u_ll', 'u*u_ll', 'u**2*u_ll', 'u**3*u_ll',
-                         'u_lll', 'u*u_lll', 'u**2*u_lll', 'u**3*u_lll', 'u_p', 'u*u_p', 
-                         'u**2*u_p', 'u**3*u_p', 'u_pp', 'u*u_pp', 'u**2*u_pp', 'u**3*u_pp', 'u_ppp', 'u*u_ppp', 
-                         'u**2*u_ppp', 'u**3*u_ppp', 'u_tm', 'u*u_tm', 'u**2*u_tm', 'u**3*u_tm', 'u_tmtm', 'u*u_tmtm', 'u**2*u_tmtm', 
-                         'u**3*u_tmtm', 'u_tmtmtm', 'u*u_tmtmtm', 'u**2*u_tmtmtm', 'u**3*u_tmtmtm']
+            # Construct the candidate matrix Phi without derivatives
+            Phi = tf.concat([
+                tf.constant(1, shape=[N_f, 1], dtype=tf.float32),  # Constant term
+                 l, p, tm,                                       # Independent variables
+                 l**2, p**2, tm**2,                           # Quadratic terms
+                 l**3, p**3, tm**3,                           # Cubic terms
+                 l**4, p**4, tm**4,                           # Quartic terms
+                                               # Pairwise interactions
+                l * p, l * tm, p * tm,                             # More pairwise interactions
+                tm**2*l, l**2 * p, p**2 * tm,                     # Mixed quadratic terms
+                 l * p * tm,                 # Triple interactions
+                                            # More triple interactions
+                p**2 * l * tm, tm * l**2 * p, tm**2 * p * l,        # Higher-order mixed terms
+                                            # Additional cubic terms
+                tm / (l + 1e-7), p / (tm + 1e-7), tm / (p + 1e-7),  # Safe division terms
+                tf.sin(tm), tf.cos(l), tf.exp(-p), tf.math.log(tm + 1e-7) # Nonlinear transformations
+            ], axis=1)
+
+            self.library_description = [
+                '1', 'l', 'p', 'tm', 'l**2', 'p**2', 'tm**2', 'l**3', 'p**3', 'tm**3', 'l**4', 'p**4', 'tm**4', 'l * p', 'l * tm', 'p * tm',
+                'tm**2*l', 'l**2 * p,' 'p**2 * tm', 'l * p * tm', 'p**2 * l * tm', 'tm * l**2 * p', 'tm**2 * p * l',
+                'tm / (l + 1e-7)', 'p / (tm + 1e-7)', 'tm / (p + 1e-7)', 'sin(tm)', 'cos(l)', 'exp(-p)', 'log(tm + 1e-7)'
+            ]
+
+            # Prediction error term (difference between modeled and actual u)
+            f = tf.matmul(Phi, self.lambda1) - u  
             
-            f = u - tf.matmul(Phi, self.lambda1)      
             return f, Phi, u
-        
+
         # def callback(self, loss, loss_u, loss_f, loss_lambda, loss_val, loss_u_val, loss_f_val):
         #     global step
         #     step = step+1
@@ -396,7 +406,7 @@ with tf.device('/device:CPU:0'):
                 # Loop of Adam optimization
                 print('Adam begins')
                 start_time = time.time()
-                for it_Adam in range(100):
+                for it_Adam in range(3400):
                     
                     self.sess.run(self.train_op_Adam, self.tf_dict)
                     
@@ -459,9 +469,9 @@ with tf.device('/device:CPU:0'):
             return u_star
         
         def callTrainSTRidge(self):
-            lam = 1e-5
-            d_tol = 1
-            maxit = 100
+            lam = 1e-3
+            d_tol = 1e-5
+            maxit = 10
             STR_iters = 10
             
             l0_penalty = None
@@ -661,7 +671,7 @@ with tf.device('/device:CPU:0'):
         start_time = time.time()
         
       # layers = [2, 20, 20, 20, 20, 20, 20, 20, 20, 1]
-        layers = [4, 80, 80, 1]
+        layers = [4, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 1]
         
 # =============================================================================
 #         load data
@@ -669,14 +679,15 @@ with tf.device('/device:CPU:0'):
         # data = scipy.io.loadmat(os.path.dirname(os.getcwd()) + '\\burgers.mat')
         # data = scipy.io.loadmat(os.path.dirname(os.path.dirname(os.getcwd())) + '\\burgers.mat')
         # Load CSV data
-        data = pd.read_csv("C:/Users/chidi/Documents/HITACHI/Projects/Equation_discovery_ML/EQUATION-DISCOVERY-in-ML/codes/clamping_force2_norm.csv")
+        data = pd.read_csv("C:/Users/chidi/Downloads/clamping_force.csv")
+        data = data.iloc[950:3460]
 
-        t = data['BrakingTime_2'].values
+        t = data['currentTime'].values
         p = data['POS_MEASUREREV'].values
         tm = data['TMC_filtered'].values
-        l = data['disc_heating_BTM_FL'].values
+        l = data['Lookup_Table'].values
 
-        X_star = data[['BrakingTime_2', 'POS_MEASUREREV', 'TMC_filtered', 'disc_heating_BTM_FL']].values
+        X_star = data[['currentTime', 'Lookup_Table', 'POS_MEASUREREV', 'TMC_filtered']].values
         u_star = data['CF_FL'].values.reshape(-1, 1)
 
         # Define domain bounds
@@ -698,7 +709,7 @@ with tf.device('/device:CPU:0'):
         u_val = u_star[val_indices]
 
         # Collocation points
-        N_f = 50000
+        N_f = 5000
         X_f_train = lb + (ub - lb) * lhs(X_star.shape[1], N_f)
         X_f_train = np.vstack((X_f_train, X_u_train))
 
@@ -708,14 +719,14 @@ with tf.device('/device:CPU:0'):
 #         model
 # =============================================================================
         model = PhysicsInformedNN(X_u_train, u_train, X_f_train, X_u_val, u_val, layers, lb, ub)
-        model.train(6)
+        model.train(10)
         
 # =============================================================================
 #         results & diagnostics
 # =============================================================================
         # determine whether the training is sufficient
         
-        f = open("stdout.txt", "a+")
+        f = open("stdout_4_5000_terms.txt", "a+")
                 
         u_train_Pred = model.predict(X_u_train)                
         Error_u_Train = np.linalg.norm(u_train-u_train_Pred,2)/np.linalg.norm(u_train,2)   
@@ -802,7 +813,7 @@ with tf.device('/device:CPU:0'):
         plt.plot(loss_history_Adam)
         plt.xlabel('10x')
         plt.title('log loss history of Adam')
-        plt.savefig('8.png')
+        plt.savefig('8_term.png')
         plt.close(fig)
         
         fig = plt.figure()
@@ -813,7 +824,7 @@ with tf.device('/device:CPU:0'):
             print("Data contains no positive values, skipping log scale.")        
         plt.xlabel('10x')
         plt.title('loss_u history of Adam')  
-        plt.savefig('9.png')
+        plt.savefig('9_term.png')
         plt.close(fig)
         
         fig = plt.figure()
@@ -824,7 +835,7 @@ with tf.device('/device:CPU:0'):
             print("Data contains no positive values, skipping log scale.")        
         plt.xlabel('10x')
         plt.title('loss_f history of Adam')  
-        plt.savefig('10.png')
+        plt.savefig('10_term.png')
         plt.close(fig)
                 
         fig = plt.figure()
@@ -835,14 +846,14 @@ with tf.device('/device:CPU:0'):
             print("Data contains no positive values, skipping log scale.")        
         plt.xlabel('10x')
         plt.title('loss_lambda history of Adam')  
-        plt.savefig('11.png')
+        plt.savefig('11_term.png')
         plt.close(fig)
         
         fig = plt.figure()
         plt.plot(loss_history_Adam_val)
         plt.xlabel('10x')
         plt.title('log loss_val history of Adam')
-        plt.savefig('12.png')
+        plt.savefig('12_yerm.png')
         plt.close(fig)
         
         fig = plt.figure()
@@ -853,7 +864,7 @@ with tf.device('/device:CPU:0'):
             print("Data contains no positive values, skipping log scale.")        
         plt.xlabel('10x')
         plt.title('loss_u_val history of Adam')  
-        plt.savefig('13.png')
+        plt.savefig('13_term.png')
         plt.close(fig)
         
         fig = plt.figure()
@@ -864,7 +875,7 @@ with tf.device('/device:CPU:0'):
             print("Data contains no positive values, skipping log scale.")        
         plt.xlabel('10x')
         plt.title('loss_f_val history of Adam')  
-        plt.savefig('14.png')
+        plt.savefig('14_term.png')
         plt.close(fig)
                 
         ######################## Plots for BFGS #################
@@ -923,7 +934,7 @@ with tf.device('/device:CPU:0'):
         else:
             print("Data contains no positive values, skipping log scale.")        
         plt.title('loss history of STRidge')
-        plt.savefig('22.png')
+        plt.savefig('22_term.png')
         plt.close(fig)
         
         fig = plt.figure()
@@ -943,7 +954,7 @@ with tf.device('/device:CPU:0'):
         else:
             print("Data contains no positive values, skipping log scale.")        
         plt.title('loss_lambda history of STRidge')
-        plt.savefig('26.png')
+        plt.savefig('24.png')
         plt.close(fig)
         
         fig = plt.figure()
@@ -955,14 +966,14 @@ with tf.device('/device:CPU:0'):
         fig = plt.figure()
         plt.plot(optimaltol_history)
         plt.title('History of Optimal Tolerance')
-        plt.savefig('26.png')
+        plt.savefig('26_term.png')
         plt.close(fig)     
         
         fig = plt.figure()
         for i in range(lambda_normalized_history_STRidge.shape[0]):
             plt.plot(lambda_normalized_history_STRidge[i, 1:])
         plt.title('lambda_normalized_history_STRidge')
-        plt.savefig('27.png')
+        plt.savefig('27_term.png')
         plt.close(fig)
         
 # =============================================================================
@@ -974,9 +985,9 @@ with tf.device('/device:CPU:0'):
         f.write('Full Field Error u: %e \n' % (error_u))    
 
     # save inferred system response for plotting manuscript figures in MATLAB.
-        scipy.io.savemat('Pred.mat',{'u_FullField_Pred':u_FullField_Pred}) 
+        scipy.io.savemat('Pred_term.mat',{'u_FullField_Pred':u_FullField_Pred}) 
         
-        scipy.io.savemat('Histories.mat',{'lambda_history_Pretrain':lambda_history_Pretrain,
+        scipy.io.savemat('Histories_term.mat',{'lambda_history_Pretrain':lambda_history_Pretrain,
                                           'lambda_history_Adam': lambda_history_Adam,
                                           'lambda_history_STRidge': lambda_history_STRidge,
                                           'ridge_append_counter_STRidge': ridge_append_counter_STRidge,
@@ -991,7 +1002,7 @@ with tf.device('/device:CPU:0'):
         plt.title("Comparison of Ground Truth and Predicted $u$")
         plt.legend()
         plt.grid(True)
-        plt.savefig('u_comparison_line.png')
+        plt.savefig('u_comparison_line_term.png')
         plt.close(fig)
 
         # Scatter Plot: Compare point-to-point predicted and ground truth
@@ -1003,12 +1014,12 @@ with tf.device('/device:CPU:0'):
         plt.title("Scatter Plot: Ground Truth vs Predicted $u$")
         plt.legend()
         plt.grid(True)
-        plt.savefig('u_comparison_scatter.png')
+        plt.savefig('u_comparison_scatter_term.png')
         plt.close(fig)
 
         # Compare lambda values
         lambda1_value = model.sess.run(model.lambda1)
-        lambda1_true = np.zeros((40, 1))
+        lambda1_true = np.zeros((30, 1))
         lambda1_true[5] = -1
         lambda1_true[8] = 0.1
 
@@ -1037,7 +1048,7 @@ with tf.device('/device:CPU:0'):
             if lambda1_value[i_lib] != 0:
                 disc_eq_temp.append(str(lambda1_value[i_lib, 0]) + model.library_description[i_lib])
         disc_eq = '+'.join(disc_eq_temp)
-        f.write('The discovered equation: u = ' + disc_eq)
+        f.write('The discovered equation: CF = ' + disc_eq)
         f.close()
 
         # Plot the lambda values
@@ -1046,7 +1057,7 @@ with tf.device('/device:CPU:0'):
         plt.plot(lambda1_value, label='The Identified')
         plt.title('Lambda Values')
         plt.legend()
-        plt.savefig('lambda_comparison.png')
+        plt.savefig('lambda_comparison_term.png')
         plt.close(fig)
 
         # Compute absolute differences for analysis
@@ -1060,5 +1071,7 @@ with tf.device('/device:CPU:0'):
         plt.title("Absolute Difference Between Predicted and Ground Truth $u$")
         plt.legend()
         plt.grid(True)
-        plt.savefig("difference_line.png")
+        plt.savefig("difference_line_term.png")
         plt.close(fig)
+
+        

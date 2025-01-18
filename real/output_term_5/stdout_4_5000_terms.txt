@@ -1,0 +1,11 @@
+Training Error u: 3.605529e-01 
+Validation Error u: 3.649040e-01 
+Training time: 1154.8837 
+Full Field Error u: 3.614328e-01 
+Cosine similarity of lambda: 0.00 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000000e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: CF = -4.0548197e-381+-5.0233057e-34l+-1.4799203e-37p+-1.6547872e-34tm+-8.380586e-30l**2+-6.899429e-37p**2+-1.0383485e-30tm**2+-1.5105757e-25l**3+-3.4134336e-36p**3+-7.2510816e-27tm**3+-2.8312498e-21l**4+-1.7418734e-35p**4+-5.2999614e-23tm**4+-2.1313733e-33l * p+-2.5353935e-30l * tm+-7.3565926e-34p * tm+-1.6851676e-26tm**2*l+-3.6703903e-29l**2 * p,p**2 * tm+-3.6204973e-33l * p * tm+-1.194171e-29p**2 * l * tm+-6.0451793e-29tm * l**2 * p+-2.1744376e-25tm**2 * p * l+-8.259947e-26tm / (l + 1e-7)+-3.461913e-38p / (tm + 1e-7)+-3.1583302e-34tm / (p + 1e-7)+-1.3185642e-31sin(tm)+6.29651e-40cos(l)+-4.265523e-39exp(-p)+-6.499292e-39log(tm + 1e-7)

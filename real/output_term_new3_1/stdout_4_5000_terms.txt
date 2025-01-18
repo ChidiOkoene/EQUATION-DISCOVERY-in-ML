@@ -1,0 +1,75 @@
+Training Error u: 3.610071e-01 
+Validation Error u: 3.605342e-01 
+Training time: 1727.0709 
+Full Field Error u: 3.609035e-01 
+Cosine similarity of lambda: -0.00 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000000e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: CF = -7.133697e-351+-6.293306e-34t+-2.5575802e-34p+-2.7826295e-31tm+-7.333246e-33t**2+-1.1569046e-33p**2+-1.6556137e-27tm**2+-9.3863694e-32t**3+-5.5694287e-33p**3+-1.1017113e-23tm**3+-1.2738876e-30t**4+-2.766539e-32p**4+-7.680157e-20tm**4+-2.3671648e-33t * p+-2.5505064e-30t * tm+-1e-45l * tm+-1.1818424e-30p * tm+-5.5911243e-30p**2 * tm+-1.08498234e-29t * p * tm+-4e-45l * p * tm+-1e-44t * l * tm+-4e-45l * p * tm+-1.08e-43t**2 * l * tm+-6.656256e-26tm**2 * p * t+-6.9430564e-30(p*t)**3+-1.1989999e-21(tm*p)**3+-6.2933016e-27t / (l + 1e-7)+-3.5954996e-31p / (tm + 1e-7)+-2.149014e-31tm / (t + 1e-7)+-2.4090983e-36sin(t)+-7.133697e-35cos(l)+-1.061548e-35exp(-p)+-4.7171284e-34log(tm + 1e-7)
+Training Error u: 3.579734e-01 
+Validation Error u: 3.577472e-01 
+Training time: 1483.3753 
+Full Field Error u: 3.579155e-01 
+Cosine similarity of lambda: -0.00 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000000e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: CF = -7.133697e-351+-6.293306e-34t+-2.5575802e-34p+-2.7826295e-31tm+-7.333246e-33t**2+-1.1569046e-33p**2+-1.6556137e-27tm**2+-9.3863694e-32t**3+-5.5694287e-33p**3+-1.1017113e-23tm**3+-1.2738876e-30t**4+-2.766539e-32p**4+-7.680157e-20tm**4+-2.3671648e-33t * p+-2.5505064e-30t * tm+-1e-45l * tm+-1.1818424e-30p * tm+-5.5911243e-30p**2 * tm+-1.08498234e-29t * p * tm+-4e-45l * p * tm+-1e-44t * l * tm+-4e-45l * p * tm+-1.08e-43t**2 * l * tm+-6.656256e-26tm**2 * p * t+-6.9430564e-30(p*t)**3+-1.1989999e-21(tm*p)**3+-6.2933016e-27t / (l + 1e-7)+-3.5954996e-31p / (tm + 1e-7)+-2.149014e-31tm / (t + 1e-7)+-2.4090983e-36sin(t)+-7.133697e-35cos(l)+-1.061548e-35exp(-p)+-4.7171284e-34log(tm + 1e-7)Training Error u: 3.941908e+15 
+Validation Error u: 3.491420e+15 
+Training time: 2854.5652 
+Full Field Error u: 3.855364e+15 
+Cosine similarity of lambda: 0.00 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000000e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: CF = 1.1508736e-371+7.969106e-37t+3.697381e-37p+5.0286225e-34tm+9.0234696e-36t**2+1.6036748e-36p**2+3.1584845e-30tm**2+1.1605354e-34t**3+7.570845e-36p**3+2.1631755e-26tm**3+1.5944222e-33t**4+3.7393907e-35p**4+1.5439345e-22tm**4+2.9793828e-36t * p+3.9351933e-33t * tm+1.9369581e-33p * tm+8.810207e-33p**2 * tm+1.5389535e-32t * p * tm+9.7519776e-29tm**2 * p * t+8.32873e-33(p*t)**3+2.0261928e-24(tm*p)**3+7.969111e-30t / (l + 1e-7)+1.5381921e-33p / (tm + 1e-7)+5.877267e-34tm / (t + 1e-7)+1.1285381e-38sin(t)+1.1508736e-37cos(l)+2.2107958e-38exp(-p)+6.6092868e-37log(tm + 1e-7)Training Error u: 1.371973e+04 
+Validation Error u: 1.372754e+04 
+Training time: 5275.3452 
+Full Field Error u: 1.372128e+04 
+Cosine similarity of lambda: -0.00 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000000e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: CF = -2.060888e-351+-3.9677085e-34t+-1.0014248e-34p+-1.3521458e-31tm+-5.3891233e-33t**2+-4.5672997e-34p**2+-8.547985e-28tm**2+-7.539141e-32t**3+-2.204234e-33p**3+-5.772648e-24tm**3+-1.0876835e-30t**4+-1.09239645e-32p**4+-4.0248583e-20tm**4+-1.35320035e-33t * p+-1.7843239e-30t * tm+-5.320778e-31p * tm+-2.4227397e-30p**2 * tm+-6.487159e-30t * p * tm+-3e-45l * p * tm+-7e-45t * l * tm+-3e-45l * p * tm+-8.4e-44t**2 * l * tm+-3.9553624e-26tm**2 * p * t+-4.5852002e-30(p*t)**3+-4.918393e-22(tm*p)**3+-3.9677065e-27t / (l + 1e-7)+7.336214e-31p / (tm + 1e-7)+4.7049205e-32tm / (t + 1e-7)+3.445811e-36sin(t)+-2.060888e-35cos(l)+2.9049732e-36exp(-p)+-3.130076e-34log(tm + 1e-7)
+Training Error u: 3.874763e-01 
+Validation Error u: 3.873548e-01 
+Training time: 5348.7812 
+Full Field Error u: 3.874666e-01 
+Cosine similarity of lambda: -0.00 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000000e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: CF = -2.060888e-351+-3.9677085e-34t+-1.0014248e-34p+-1.3521458e-31tm+-5.3891233e-33t**2+-4.5672997e-34p**2+-8.547985e-28tm**2+-7.539141e-32t**3+-2.204234e-33p**3+-5.772648e-24tm**3+-1.0876835e-30t**4+-1.09239645e-32p**4+-4.0248583e-20tm**4+-1.35320035e-33t * p+-1.7843239e-30t * tm+-5.320778e-31p * tm+-2.4227397e-30p**2 * tm+-6.487159e-30t * p * tm+-3e-45l * p * tm+-7e-45t * l * tm+-3e-45l * p * tm+-8.4e-44t**2 * l * tm+-3.9553624e-26tm**2 * p * t+-4.5852002e-30(p*t)**3+-4.918393e-22(tm*p)**3+-3.9677065e-27t / (l + 1e-7)+7.336214e-31p / (tm + 1e-7)+4.7049205e-32tm / (t + 1e-7)+3.445811e-36sin(t)+-2.060888e-35cos(l)+2.9049732e-36exp(-p)+-3.130076e-34log(tm + 1e-7)
+Training Error u: 3.138736e-01 
+Validation Error u: 4.212175e-01 
+Training time: 1305.7328 
+Full Field Error u: 3.342325e-01 
+Cosine similarity of lambda: -0.00 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000000e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: CF = -9.350234e-311+-4.799327e-31t+-1.1771363e-30l+-2.2908393e-30p+-8.143667e-28tm+-3.98919e-31t**2+-2.4578835e-30l**2+-8.6288816e-30p**2+-1.3868044e-24tm**2+-3.6686292e-31t**3+-5.6956753e-30l**3+-3.4996452e-29p**3+-2.7831758e-21tm**3+-3.5747456e-31t**4+-1.3960582e-29l**4+-1.4789629e-28p**4+-6.044708e-18tm**4+-7.940381e-31t * l+-1.5432894e-30t * p+-5.508729e-28t * tm+-3.7212638e-30l * p+-1.3523037e-27l * tm+-2.6809802e-27p * tm+-6.719964e-31t**2 * l+-7.8053374e-30l**2 * p+-1.0339531e-26p**2 * tm+-2.6043677e-30t * l * p+-1.8882667e-27t * p * tm+-4.584324e-27l * p * tm+-9.67934e-28t * l * tm+-4.584324e-27l * p * tm+-8.462459e-28t**2 * l * tm+-5.55458e-30t * l**2 * p+-3.3447292e-24tm**2 * p * t+-3.1788764e-30(t*l)**3+-2.795283e-28(l*p)**3+-1.9043704e-29(p*t)**3+-1.5058742e-19(tm*p)**3+-2.3994076e-30t / (l + 1e-7)+-5.6058994e-27p / (tm + 1e-7)+-5.108486e-27tm / (t + 1e-7)+-4.2172614e-31sin(t)+-1.7464579e-31cos(l)+-2.9367274e-31exp(-p)+-1.6825046e-30log(tm + 1e-7)
+Training Error u: 3.291358e-01 
+Validation Error u: 5.066762e-01 
+Training time: 1332.4977 
+Full Field Error u: 3.774424e-01 
+Cosine similarity of lambda: -0.00 
+lambda5_error: 100.00% 
+lambda8_error: 100.00% 
+Lambda L2 Error: 1.000000e+00 
+lambda_error_mean: 100.00% 
+lambda_error_std: 0.00% 
+The discovered equation: CF = -9.350234e-311+-4.799327e-31t+-1.1771363e-30l+-2.2908393e-30p+-8.143667e-28tm+-3.98919e-31t**2+-2.4578835e-30l**2+-8.6288816e-30p**2+-1.3868044e-24tm**2+-3.6686292e-31t**3+-5.6956753e-30l**3+-3.4996452e-29p**3+-2.7831758e-21tm**3+-3.5747456e-31t**4+-1.3960582e-29l**4+-1.4789629e-28p**4+-6.044708e-18tm**4+-7.940381e-31t * l+-1.5432894e-30t * p+-5.508729e-28t * tm+-3.7212638e-30l * p+-1.3523037e-27l * tm+-2.6809802e-27p * tm+-6.719964e-31t**2 * l+-7.8053374e-30l**2 * p+-1.0339531e-26p**2 * tm+-2.6043677e-30t * l * p+-1.8882667e-27t * p * tm+-4.584324e-27l * p * tm+-9.67934e-28t * l * tm+-4.584324e-27l * p * tm+-8.462459e-28t**2 * l * tm+-5.55458e-30t * l**2 * p+-3.3447292e-24tm**2 * p * t+-3.1788764e-30(t*l)**3+-2.795283e-28(l*p)**3+-1.9043704e-29(p*t)**3+-1.5058742e-19(tm*p)**3+-2.3994076e-30t / (l + 1e-7)+-5.6058994e-27p / (tm + 1e-7)+-5.108486e-27tm / (t + 1e-7)+-4.2172614e-31sin(t)+-1.7464579e-31cos(l)+-2.9367274e-31exp(-p)+-1.6825046e-30log(tm + 1e-7)
