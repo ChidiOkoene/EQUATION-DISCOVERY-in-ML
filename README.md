@@ -2,10 +2,10 @@
 
 **Discover governing equations from data** — comparing physics-informed deep learning, sparse identification, and symbolic regression on PDE benchmarks and industrial time series.
 
-This repository is a hands-on exploration of modern equation-discovery methods: how they recover interpretable dynamics, where they shine, and how they behave on real clamping-force / VDC measurements.
+This repository is organized **problem-first**: explore methods on the Burgers benchmark, then on industrial clamping-force / VDC measurements.
 
 <p align="center">
-  <img src="results/burgers-pidl/u_comparison_line.png" alt="Burgers PiDL: predicted vs true field" width="720"/>
+  <img src="results/burgers/pidl/u_comparison_line.png" alt="Burgers PiDL: predicted vs true field" width="720"/>
 </p>
 <p align="center"><em>Burgers’ equation — PiDL field reconstruction vs ground truth</em></p>
 
@@ -15,26 +15,26 @@ This repository is a hands-on exploration of modern equation-discovery methods: 
 
 Classical ML predicts well but rarely tells you *what law* the system follows. Equation discovery aims for models you can read:
 
-| Method | Idea | In this repo |
-|--------|------|--------------|
-| **PiDL** | PINN approximates the field; sparse regression (STRidge) selects PDE/ODE terms | Primary thread — Burgers’ + industrial CSVs |
-| **PySINDy** | Sparse identification of nonlinear dynamics | Tutorials + trials |
-| **PySR** | Genetic / symbolic regression | Burgers’ & tabular experiments |
-| **PINNs** | Physics-informed neural nets (data-driven vs physics-informed) | Teaching examples |
+| Method | Idea | Where in this repo |
+|--------|------|--------------------|
+| **PiDL** | PINN approximates the field; sparse regression (STRidge) selects PDE/ODE terms | [`experiments/burgers/pidl/`](experiments/burgers/pidl/), [`experiments/industrial/pidl/`](experiments/industrial/pidl/) |
+| **PySINDy** | Sparse identification of nonlinear dynamics | [`experiments/burgers/sindy/`](experiments/burgers/sindy/), [`examples/pysindy/`](examples/pysindy/) |
+| **PySR** | Genetic / symbolic regression | [`experiments/burgers/pysr/`](experiments/burgers/pysr/) |
+| **PINNs** | Physics-informed neural nets (data-driven vs physics-informed) | [`experiments/burgers/pinns/`](experiments/burgers/pinns/) |
 
-Core PiDL reference: Chen, Liu & Sun, *Physics-informed deep learning of equations* ([`papers/PiDL.pdf`](papers/PiDL.pdf)).
+Core PiDL reference: Chen, Liu & Sun, *Physics-informed deep learning of equations* ([`docs/papers/PiDL.pdf`](docs/papers/PiDL.pdf)).
 
 ---
 
 ## Highlights
 
-- **Benchmark:** sparse recovery of Burgers’ dynamics with archived run logs and plots under [`results/burgers-pidl/`](results/burgers-pidl/)
-- **Industrial:** dozens of PiDL runs on clamping-force / SWE_VDC series under [`results/industrial/`](results/industrial/)
-- **Side-by-side methods:** notebooks for PiDL, SINDy, PySR, and PINNs
-- **Background:** conceptual notes in [`notebooks/notes/Notes.ipynb`](notebooks/notes/Notes.ipynb)
+- **Benchmark:** sparse recovery of Burgers’ dynamics under [`results/burgers/pidl/`](results/burgers/pidl/)
+- **Industrial:** dozens of PiDL runs under [`results/industrial/pidl/archive/`](results/industrial/pidl/archive/)
+- **Side-by-side methods** on Burgers: PiDL, SINDy, PySR, and PINNs in [`experiments/burgers/`](experiments/burgers/)
+- **Background:** [`docs/notes/Notes.ipynb`](docs/notes/Notes.ipynb)
 
 <p align="center">
-  <img src="results/root-term/u_comparison_line_term.png" alt="Industrial term experiment comparison" width="720"/>
+  <img src="results/industrial/pidl/term-library/u_comparison_line_term.png" alt="Industrial term experiment comparison" width="720"/>
 </p>
 <p align="center"><em>Industrial series — predicted vs measured trajectories (term experiment)</em></p>
 
@@ -44,32 +44,33 @@ Core PiDL reference: Chen, Liu & Sun, *Physics-informed deep learning of equatio
 
 ```text
 .
+├── docs/
+│   ├── papers/                      # Reference PDFs
+│   └── notes/                       # Conceptual notebooks
 ├── data/
-│   ├── burgers/          # Burgers .mat/.csv + misc tabular samples
-│   ├── industrial/       # Clamping-force & VDC CSVs
-│   └── reconstructed/    # Synthesized rows consistent with discovered formulas
-├── notebooks/
-│   ├── pidl/             # PiDL experiments (Torch & industrial)
-│   ├── pysindy/          # SINDy trials
-│   ├── pysr/             # PySR / symbolic regression
-│   ├── pinns/            # PINN demos
-│   └── notes/            # Background & misc notebooks
-├── scripts/
-│   ├── pidl/burgers/     # Burgers PiDL training scripts
-│   ├── pidl/industrial/  # Industrial PiDL / EqD scripts
-│   ├── pinns/            # Short PINN examples
-│   └── utils/            # Data reconstruction & helpers
-├── tutorials/pysindy/    # Upstream-style SINDy intros
-├── results/              # All experiment artifacts (kept in full)
-│   ├── burgers-pidl/
-│   ├── industrial/       # output_* run folders
-│   ├── root-term/        # Standalone term-run plots & .mat dumps
-│   ├── pysr-hall-of-fame/
-│   ├── training-runs/
-│   └── misc/
-├── papers/               # Reference PDFs
-├── requirements.txt      # Portable install set
-└── requirements.windows-freeze.txt  # Original Windows env freeze
+│   ├── benchmarks/burgers/          # Burgers .mat / CSV only
+│   ├── applications/industrial/     # Clamping-force & VDC CSVs
+│   ├── tabular/                     # Housing, wine, automobile samples
+│   └── reconstructed/               # Rows synthesized from discovered formulas
+├── experiments/                     # Spine: problem → method
+│   ├── burgers/
+│   │   ├── pidl/
+│   │   ├── pysr/
+│   │   ├── sindy/
+│   │   └── pinns/
+│   └── industrial/
+│       └── pidl/
+├── examples/pysindy/                # Upstream-style SINDy intros
+├── tools/                           # Reconstruction helpers
+├── results/                         # Mirrors experiments/ (all artifacts kept)
+│   ├── burgers/pidl/
+│   ├── burgers/pysr/
+│   └── industrial/pidl/
+│       ├── term-library/
+│       ├── archive/                 # output_* run folders
+│       └── misc/
+├── requirements.txt
+└── requirements.windows-freeze.txt
 ```
 
 Every previous plot, `.mat`, and run folder is retained — only relocated for clarity.
@@ -95,10 +96,10 @@ Browse results without training:
 
 ```bash
 # Burgers gallery
-open results/burgers-pidl/u_comparison_line.png
+open results/burgers/pidl/u_comparison_line.png
 
 # Industrial run folder (example)
-ls results/industrial/new_output_2/
+ls results/industrial/pidl/archive/new_output_2/
 ```
 
 ---
@@ -106,24 +107,23 @@ ls results/industrial/new_output_2/
 ## Explore by path
 
 ### 1. Read the story
-- [`notebooks/notes/Notes.ipynb`](notebooks/notes/Notes.ipynb) — equation discovery vs classical ML
-- [`papers/PiDL.pdf`](papers/PiDL.pdf), [`papers/long24a.pdf`](papers/long24a.pdf)
+- [`docs/notes/Notes.ipynb`](docs/notes/Notes.ipynb) — equation discovery vs classical ML
+- [`docs/papers/PiDL.pdf`](docs/papers/PiDL.pdf), [`docs/papers/long24a.pdf`](docs/papers/long24a.pdf)
 
-### 2. Burgers’ with PiDL
-- Scripts: [`scripts/pidl/burgers/`](scripts/pidl/burgers/)
-- Data: [`data/burgers/burgers.mat`](data/burgers/burgers.mat)
-- Results: [`results/burgers-pidl/`](results/burgers-pidl/) (includes `stdout.txt` with discovered PDE coefficients)
+### 2. Burgers’ benchmark
+- Experiments: [`experiments/burgers/`](experiments/burgers/) — start with [`pidl/`](experiments/burgers/pidl/)
+- Data: [`data/benchmarks/burgers/burgers.mat`](data/benchmarks/burgers/burgers.mat)
+- Results: [`results/burgers/pidl/`](results/burgers/pidl/) (includes `stdout.txt` with discovered PDE coefficients)
 
 ### 3. Industrial clamping-force / VDC
-- Scripts: [`scripts/pidl/industrial/`](scripts/pidl/industrial/) — start with `PiDL_EqD.py`, `EqD_4.py`–`EqD_6.py`, `eqd_sym_term_try3.py`
-- Data: [`data/industrial/`](data/industrial/)
-- Notebook: [`notebooks/pidl/Eqd_pidl.ipynb`](notebooks/pidl/Eqd_pidl.ipynb)
-- Results: [`results/industrial/`](results/industrial/)
+- Experiments: [`experiments/industrial/pidl/`](experiments/industrial/pidl/) — start with `PiDL_EqD.py`, `EqD_4.py`–`EqD_6.py`, `eqd_sym_term_try3.py`
+- Data: [`data/applications/industrial/`](data/applications/industrial/)
+- Notebook: [`experiments/industrial/pidl/Eqd_pidl.ipynb`](experiments/industrial/pidl/Eqd_pidl.ipynb)
+- Results: [`results/industrial/pidl/archive/`](results/industrial/pidl/archive/), term runs in [`term-library/`](results/industrial/pidl/term-library/)
 
-### 4. SINDy / PySR / PINNs
-- Tutorials: [`tutorials/pysindy/`](tutorials/pysindy/)
-- Trials: [`notebooks/pysindy/`](notebooks/pysindy/), [`notebooks/pysr/`](notebooks/pysr/), [`notebooks/pinns/`](notebooks/pinns/)
-- PINN scripts: [`scripts/pinns/`](scripts/pinns/)
+### 4. Examples & tools
+- SINDy tutorials: [`examples/pysindy/`](examples/pysindy/)
+- Helpers: [`tools/`](tools/)
 
 ---
 
@@ -132,18 +132,18 @@ ls results/industrial/new_output_2/
 Many scripts were written against **Windows absolute paths** (e.g. `C:/Users/.../clamping_force.csv`). After this restructure, point loaders at the new relative locations, for example:
 
 ```python
-# Industrial CSV
-data = pd.read_csv("../../data/industrial/clamping_force.csv")
+# Industrial CSV (from experiments/industrial/pidl/)
+data = pd.read_csv("../../../data/applications/industrial/clamping_force.csv")
 
-# Burgers MAT
-data = scipy.io.loadmat("../../data/burgers/burgers.mat")
+# Burgers MAT (from experiments/burgers/pidl/)
+data = scipy.io.loadmat("../../../data/benchmarks/burgers/burgers.mat")
 ```
 
 Run PiDL scripts from a fresh results directory so plots/logs land together:
 
 ```bash
-mkdir -p results/industrial/my_run && cd results/industrial/my_run
-python ../../../scripts/pidl/industrial/PiDL_EqD.py
+mkdir -p results/industrial/pidl/archive/my_run && cd results/industrial/pidl/archive/my_run
+python ../../../../../experiments/industrial/pidl/PiDL_EqD.py
 ```
 
 ---
