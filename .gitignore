@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+# Keep shared launch configs if desired; ignore local overrides
+.vscode/*.log
+
+# Local experiment scratch (committed historical results/ stay tracked)
+*.log
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Julia / PySR scratch
+julia_env/
+.julia/
